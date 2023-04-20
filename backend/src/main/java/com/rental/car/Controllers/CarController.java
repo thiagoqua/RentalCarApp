@@ -1,14 +1,46 @@
 package com.rental.car.Controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.rental.car.Models.Car;
+import com.rental.car.Services.CarService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class CarController {
+    @Autowired
+    private CarService service;
+
+    @GetMapping("/all")
+    private List<Car> getAll(){
+        return service.getAllCars();
+    }
+
+    @GetMapping("/category/{cat}")
+    private List<Car> getByCategory(@PathVariable String cat){
+        return service.getByCategory(cat);
+    }
+
+    @GetMapping("/price/{maxPrice}")
+    private List<Car> getByMaxPrice(@PathVariable Double maxPrice){
+        return service.getByPriceLessThan(maxPrice);
+    }
+
+    @GetMapping("/categories")
+    private List<String> getCategories(){return service.getCategories();}
+
+    @GetMapping("/disponibility")
+    private List<Car> getCarsByDisponibility(@RequestParam Map<String,String> params){
+        return service.getCarsByDisponibility(params.get("in"),params.get("out"));
+    }
+
     @GetMapping("/test")
-    public String test(){
-        return "it works steve";
+    private String test(){
+        return "it works pepote";
     }
 }

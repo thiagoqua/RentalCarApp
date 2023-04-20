@@ -1,4 +1,4 @@
-import './Navbar.css'
+import './Components.css'
 
 export function Navbar():JSX.Element{
     return (
