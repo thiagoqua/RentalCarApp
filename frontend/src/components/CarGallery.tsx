@@ -1,7 +1,6 @@
-import { Vehicle } from "./Vehicle";
-import './Components.css'
+import './Components.css';
 import { useEffect, useState } from "react";
-import { APIURL } from "../constants";
+import { APIURL, CATEGORIES } from "../constants";
 import { Car } from "../models/Car";
 import { CarService } from "../services/carService";
 import Container from 'react-bootstrap/Container';
@@ -10,10 +9,9 @@ import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.css';
 import { RentVehicles } from "./RentVehicles";
 
-export function VehicleModels():JSX.Element{
+export function CarGallery():JSX.Element{
     const [vehicles,setVehicles] = useState<Car[]>([]);
     const [currentCarIndex,setCurrentCarIndex] = useState<number>(0);
-    const [categories,setCategories] = useState<string[]>([]);
 
     const service:CarService = new CarService();
     
@@ -43,41 +41,48 @@ export function VehicleModels():JSX.Element{
 
     useEffect(() => {
         service.getAllCars().then((cars:Car[]) => setVehicles(cars));
-        service.getAllCategories().then((cats:string[]) => setCategories(cats));
     },[])
 
     return (
         <>
-        <h1 className="head-title">The car section</h1>
+        <h1 className="head-title">Car gallery</h1>
         <Container fluid>
             <Row>
-                <Col lg="3" md="2" style={{backgroundColor:'red'}}>
+                <Col lg="2" md="2">
                     <h3>Categories</h3>
                     <div className="item-list">
                         {
-                            categories.map(category => (
-                                <span onClick={() => {vehiclesByCategory(category)}} className="item"
-                                      key={category}>
+                            CATEGORIES.map(category => (
+                                <span onClick={() => {vehiclesByCategory(category)}} key={category}
+                                        className={`item ${vehicles[currentCarIndex].category == category 
+                                                        ? "item-clicked" 
+                                                        : "item-declicked"}`}>
                                     {category}
                                 </span>
                             ))
                         }
                     </div>
                 </Col>
-                <Col lg="6" md="7" className="vm-car"  >
-                    <img src={vehicles[currentCarIndex]?.imageURL} alt='car_image' className="vm-car-photo"/>
-                    <button onClick={() => nextOrPrevVehicle(false)}>previous vehicle</button>
-                    <button onClick={() => nextOrPrevVehicle(true)}>next vehicle</button>
-                </Col>
-                <Col lg="3" md="3" className="item-list" style={{backgroundColor:'cyan'}}>
-                    <h3>Cars</h3>
-                    {vehicles.map((car,index) => (
-                        <div className="vm-categories-cats">
-                            <span key={car.id} onClick={() => {setCurrentCarIndex(index)}} className="item">
-                                {car.brand} {car.model}
-                            </span>    
+                <Col lg="7" md="7" className="vm-car">
+                    <div>
+                        <div className="porta-photo">
+                            <img src={vehicles[currentCarIndex]?.imageURL} alt='car_image' className="vm-car-photo"/>
                         </div>
-                    ))}
+                        <button onClick={() => nextOrPrevVehicle(false)}>previous vehicle</button>
+                        <button onClick={() => nextOrPrevVehicle(true)}>next vehicle</button>
+                    </div>
+                </Col>
+                <Col lg="3" md="3">
+                    <h3>Cars</h3>
+                    <div className="item-list">
+                        {vehicles.map((car,index) => (
+                            <span key={car.id} onClick={() => {setCurrentCarIndex(index)}} 
+                                    className={`item ${vehicles[currentCarIndex].id == car.id ? 
+                                                        "item-clicked" : "item-decliked"}`}>
+                                {car.brand} {car.model}
+                            </span>
+                        ))}
+                    </div>
                 </Col>
             </Row>
         </Container>

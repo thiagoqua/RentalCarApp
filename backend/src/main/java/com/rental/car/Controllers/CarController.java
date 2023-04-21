@@ -1,8 +1,11 @@
 package com.rental.car.Controllers;
 
 import com.rental.car.Models.Car;
+import com.rental.car.Models.Disponibility;
 import com.rental.car.Services.CarService;
+import org.hibernate.mapping.Any;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -35,8 +38,11 @@ public class CarController {
     private List<String> getCategories(){return service.getCategories();}
 
     @GetMapping("/disponibility")
-    private List<Car> getCarsByDisponibility(@RequestParam Map<String,String> params){
-        return service.getCarsByDisponibility(params.get("in"),params.get("out"));
+    private List<Car> getCarsByDisponibility(@RequestParam Map<String,String> params){return service.getCarsByDisponibility(params.get("in"),params.get("out"));}
+
+    @PostMapping("/reserve")
+    private void reserveCar(@RequestBody Disponibility toReserve){
+        service.reserveCar(toReserve);
     }
 
     @GetMapping("/test")

@@ -7,6 +7,7 @@ import com.rental.car.Repositories.CarRepository;
 import com.rental.car.Repositories.DisponibilityRepository;
 import com.rental.car.Services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -23,7 +24,7 @@ public class CarServiceImpl implements CarService {
     private CarRepository carRepo;
     @Autowired
     private DisponibilityRepository dispoRepo;
-    private final String IN_OUT_HOUR = "12:00:00";          //12 pm is the default in and out hour to rent a car
+    private final String IN_OUT_HOUR = "09:00:00";          //12 pm is the default in and out hour to rent a car
 
     @Override
     public List<Car> getAllCars() {
@@ -70,5 +71,10 @@ public class CarServiceImpl implements CarService {
                 isAvailable = car.getId() != id;
             return isAvailable;
         }).toList();
+    }
+
+    @Override
+    public void reserveCar(Disponibility toReserve) {
+        dispoRepo.save(toReserve);
     }
 }
