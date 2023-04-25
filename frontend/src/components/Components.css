@@ -1,6 +1,8 @@
+.container{
+    text-align: center;
+}
+
 .navbar{
-    /* display:flex;
-    flex-direction: row; */
     justify-content: space-between;
     position: fixed;
     width: 90%;
@@ -15,15 +17,22 @@
     text-align: center;
 }
 
-.item-list{
+.item-list, .item-list-smaller{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     overflow-y: auto;
+}
+
+.item-list{
     max-height: 60vh;
 }
 
-.item-list span:hover{
+.item-list-smaller{
+    max-height: 35vh;
+}
+
+.item-list span:hover,.item-list-smaller span:hover{
     color:blueviolet;
 }
 
@@ -50,18 +59,25 @@
 
 .rv-section{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 15%;
 }
 
 .rv-section-data{
-    background-color: aquamarine;
+    display:flex;
+    flex-direction: row;
 }
 
 .rv-rent-button{
     width: 50%;
     height: 10%;
+    margin-bottom:10%;
+}
+
+.rv-select-car{
+    text-align: center;
 }
 
 .porta-photo{
@@ -69,7 +85,7 @@
     height: 0;
     padding-bottom: 56.25%;
     position: relative;
-    
+    border-color: red;
 }
 
 .porta-photo img {
@@ -87,6 +103,31 @@
     flex-wrap: wrap;
 }
 
+.vi-container{
+    display: flex;
+    flex-direction: column;
+}
+
 .vi-container div{
     text-align: center;
+}
+
+.c-info{
+    text-align: center;
+}
+
+/* equivale al sm de bootstrap */
+@media (max-width:540px){
+    .vi-container{
+        margin-top: 10%;
+    }
+
+    .vi-container div{
+        margin-top: 5%;
+        margin-left:10%;
+    }
+
+    #contact{
+        margin-top:10%;
+    }
 }

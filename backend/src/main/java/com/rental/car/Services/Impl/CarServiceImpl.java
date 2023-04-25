@@ -36,7 +36,7 @@ public class CarServiceImpl implements CarService {
         try{
             return carRepo.findByCategory(CarCategory.valueOf(category));
         } catch(IllegalArgumentException iae){
-            return List.of();
+            return Collections.emptyList();
         }
     }
 

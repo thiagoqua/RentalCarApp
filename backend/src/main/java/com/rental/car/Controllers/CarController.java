@@ -3,7 +3,6 @@ package com.rental.car.Controllers;
 import com.rental.car.Models.Car;
 import com.rental.car.Models.Disponibility;
 import com.rental.car.Services.CarService;
-import org.hibernate.mapping.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/car")
 @CrossOrigin(origins = "*")
 public class CarController {
     @Autowired
@@ -46,7 +45,7 @@ public class CarController {
     }
 
     @GetMapping("/test")
-    private String test(){
-        return "it works pepote";
+    private ResponseEntity<String> test(){
+        return ResponseEntity.ok("it works steve");
     }
 }
