@@ -36,14 +36,6 @@ public class CarController {
     @GetMapping("/categories")
     private List<String> getCategories(){return service.getCategories();}
 
-    @GetMapping("/disponibility")
-    private List<Car> getCarsByDisponibility(@RequestParam Map<String,String> params){return service.getCarsByDisponibility(params.get("in"),params.get("out"));}
-
-    @PostMapping("/reserve")
-    private void reserveCar(@RequestBody Disponibility toReserve){
-        service.reserveCar(toReserve);
-    }
-
     @GetMapping("/test")
     private ResponseEntity<String> test(){
         return ResponseEntity.ok("it works steve");

@@ -72,9 +72,4 @@ public class CarServiceImpl implements CarService {
             return isAvailable;
         }).toList();
     }
-
-    @Override
-    public void reserveCar(Disponibility toReserve) {
-        dispoRepo.save(toReserve);
-    }
 }

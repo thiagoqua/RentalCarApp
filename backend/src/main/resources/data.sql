@@ -31,6 +31,9 @@ VALUES ('familiar','mini','countryman cooper s',2024,74.0,4,'automatic','gasolin
 INSERT INTO CAR (category,brand,model,born,price,doors,transmission,fueltype,AC,urban,route,image)
 VALUES ('pickUp','toyota','hilux',2021,70.2,4,'automatic','diesel',TRUE,19,14,'https://cdn.deagenciapa.com//wp-content/uploads/2021/02/Hilix-full-icon.png');
 
+
+
+--          PROTOTYPES
 --INSERT INTO CAR (category,brand,model,born,price,doors,transmission,fueltype,AC,urban,route,image)
 --VALUES ('','','',,,,'','',TRUE,,,'');
 --INSERT INTO CAR (category,brand,model,born,price,doors,transmission,fueltype,AC,urban,route,image)

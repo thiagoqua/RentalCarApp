@@ -1,11 +1,7 @@
 package com.rental.car.Services;
 
 import com.rental.car.Models.Car;
-import com.rental.car.Models.CarCategory;
 import com.rental.car.Models.Disponibility;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Date;
 import java.util.List;
 
 public interface CarService {
@@ -14,6 +10,4 @@ public interface CarService {
     List<Car> getByPriceLessThan(Double maxPrice);
     List<String> getCategories();
     List<Car> getCarsByDisponibility(String dateInStr,String dateOutStr);
-
-    void reserveCar(Disponibility toReserve);
 }

@@ -16,7 +16,7 @@ export class CarService{
     }
 
     public getCarsDisponibility(dateIn:string,dateOff:string):Promise<Car[]>{
-        return fetch(`${APIURL}/car/disponibility?in=${dateIn}&out=${dateOff}`)
+        return fetch(`${APIURL}/disponibility/cars?in=${dateIn}&out=${dateOff}`)
         .then(data => data.json());
     }
 
