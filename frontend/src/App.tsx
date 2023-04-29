@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
-import { Into } from './pages/Into';
+import { Reserve } from './pages/Reserve';
 
 export default function App():JSX.Element {
   const [count, setCount] = useState(0);
@@ -13,7 +13,7 @@ export default function App():JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/into' element={<Into dispo={undefined}/>}/>
+        <Route path='/reserve' element={<Reserve/>}/>
       </Routes>
     </BrowserRouter>
   )

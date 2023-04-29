@@ -1,6 +1,6 @@
 import "./Components.css";
 import { useEffect, useState } from "react";
-import { APIURL, CATEGORIES } from "../constants";
+import { APIURL, CATEGORIES } from "./extra/constants";
 import { Car } from "../models/Car";
 import { CarService } from "../services/carService";
 import Container from "react-bootstrap/Container";

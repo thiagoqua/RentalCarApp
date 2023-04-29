@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
@@ -33,13 +35,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .nationality(request.getNationality())
+                .identifier(request.getIdentifier())
+                .borndate(Timestamp.valueOf(request.getBorndate() + " 09:00:00"))
                 .role(Role.USER)
                 .build();
 
         repo.save(user);
         token = jwtService.generateToken(user);
 
-        return AuthenticationResponse.builder().token(token).build();
+        return AuthenticationResponse.builder()
+                .token(token)
+                .id(user.getId())
+                .build();
     }
 
     @Override
@@ -53,6 +61,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user = repo.findByEmail(request.getEmail()).orElseThrow();
         token = jwtService.generateToken(user);
 
-        return AuthenticationResponse.builder().token(token).build();
+        return AuthenticationResponse.builder()
+                .token(token)
+                .id(user.getId())
+                .build();
     }
 }

@@ -38,6 +38,6 @@ public class CarController {
 
     @GetMapping("/test")
     private ResponseEntity<String> test(){
-        return ResponseEntity.ok("it works steve");
+        return ResponseEntity.ok("it works steve\n");
     }
 }

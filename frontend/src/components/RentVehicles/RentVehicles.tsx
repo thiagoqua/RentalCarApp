@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Car } from "../../models/Car";
 import { CarService } from "../../services/carService";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { CATEGORIES } from "../../constants";
+import { CATEGORIES } from "../extra/constants";
 import { VehicleInfo } from "./VehicleInfo";
 import { Link } from "react-router-dom";
 import { SeletData } from "./SelectData";
@@ -123,7 +123,7 @@ export function RentVehicles(): JSX.Element {
               <div className="porta-photo">
                 <img src={carSelected?.imageURL}/>
               </div>
-              <Link to="/into">
+              <Link to="/reserve">
                 <button className="rv-rent-button" onClick={handleRent}>rent</button>
               </Link>
             </>

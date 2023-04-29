@@ -1,5 +1,6 @@
 package com.rental.car.Models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,6 +26,9 @@ public class User implements UserDetails {
     private String lastname;
     private String email;
     private String password;
+    private String nationality;
+    private String identifier;
+    private Timestamp borndate;
     @Enumerated(EnumType.STRING)
     private Role role;
 

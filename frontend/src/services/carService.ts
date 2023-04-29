@@ -1,4 +1,4 @@
-import { APIURL } from "../constants";
+import { APIURL } from "../components/extra/constants";
 import { Car } from "../models/Car";
 
 export class CarService{
