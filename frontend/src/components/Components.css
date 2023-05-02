@@ -1,3 +1,7 @@
+div{
+    text-align: center;
+}
+
 .container{
     text-align: center;
 }
@@ -80,12 +84,15 @@
     text-align: center;
 }
 
+.photo{
+    width:50%;
+}
+
 .porta-photo{
     width: 100%;
     height: 0;
     padding-bottom: 56.25%;
     position: relative;
-    border-color: red;
 }
 
 .porta-photo img {
@@ -125,6 +132,10 @@
     .vi-container div{
         margin-top: 5%;
         margin-left:10%;
+    }
+
+    .photo{
+        width:100%;
     }
 
     #contact{

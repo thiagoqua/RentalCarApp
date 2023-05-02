@@ -1,6 +1,6 @@
 import "./Components.css";
 import { useEffect, useState } from "react";
-import { APIURL, CATEGORIES } from "./extra/constants";
+import { APIURL, CATEGORIES } from "../extra/constants";
 import { Car } from "../models/Car";
 import { CarService } from "../services/carService";
 import Container from "react-bootstrap/Container";
@@ -29,11 +29,17 @@ export function CarGallery(): JSX.Element {
     }
   };
 
-  const vehiclesByCategory = (category: string) => {
-    service.getCarsByCategory(category).then((cars: Car[]) => {
-      setVehicles(cars);
-      setCurrentCarIndex(0);
-    });
+  const vehiclesBy = (category?: string) => {
+    if(category)
+      service.getCarsByCategory(category).then((cars: Car[]) => {
+        setVehicles(cars);
+        setCurrentCarIndex(0);
+      });
+    else
+      service.getAllCars().then((cars:Car[]) => {
+        setVehicles(cars);
+        setCurrentCarIndex(0);
+      })
   };
 
   const handleCar = (index:number) => {
@@ -52,10 +58,11 @@ export function CarGallery(): JSX.Element {
           <Col lg="2" md="2">
             <h3>Categories</h3>
             <div className="item-list">
+              <span className="item" onClick={() => {vehiclesBy()}}>all</span>
               {CATEGORIES.map((category) => (
                 <span
                   onClick={() => {
-                    vehiclesByCategory(category);
+                    vehiclesBy(category);
                   }}
                   key={category}
                   className={`item ${

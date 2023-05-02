@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Car } from "../../models/Car";
 import { CarService } from "../../services/carService";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { CATEGORIES } from "../extra/constants";
+import { CATEGORIES } from "../../extra/constants";
 import { VehicleInfo } from "./VehicleInfo";
 import { Link } from "react-router-dom";
 import { SeletData } from "./SelectData";
@@ -73,7 +73,11 @@ export function RentVehicles(): JSX.Element {
   const handleRent = () => {
     const dropInDate: any = document.getElementById("dropInDate");
     const dropOffDate: any = document.getElementById("dropOffDate");
-    const dispo:Disponibility = new Disponibility(carSelected!.id,dropInDate.value,dropOffDate.value);
+    const dispo:Disponibility = new Disponibility(
+      carSelected!.id,
+      dropInDate.value + " 09:00:00",
+      dropOffDate.value + " 09:00:00");
+   
     localStorage.setItem("dispo",JSON.stringify(dispo));
   };
 

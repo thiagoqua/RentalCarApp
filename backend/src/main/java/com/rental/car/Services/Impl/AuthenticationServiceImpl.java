@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -29,6 +30,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
+        if(repo.findByEmail(request.getEmail()).isPresent())
+            return AuthenticationResponse.builder()
+                    .id(null)
+                    .token(null)
+                    .build();
         String token;
         User user = User.builder()
                 .firstname(request.getFirstname())
@@ -52,18 +58,31 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        Optional<User> userCheck;
         User user;
         String token;
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()
                 )
         );
-        user = repo.findByEmail(request.getEmail()).orElseThrow();
-        token = jwtService.generateToken(user);
+        userCheck = repo.findByEmail(request.getEmail());
 
+        if(userCheck.isEmpty()){
+            System.out.println("dont exists");
+            return AuthenticationResponse.builder().id((long) -1).build();
+        }
+
+        user = userCheck.get();
+        token = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
-                .token(token)
                 .id(user.getId())
+                .token(token)
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
+                .email(user.getEmail())
+                .nationality(user.getNationality())
+                .identifier(user.getIdentifier())
+                .borndate(user.getBorndate().toString())
                 .build();
     }
 }

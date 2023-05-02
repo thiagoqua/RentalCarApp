@@ -15,6 +15,7 @@ public interface DisponibilityRepository extends JpaRepository<Disponibility,Lon
 
     @Query(value = findNotAvailableCarsQuery,nativeQuery = true)
     List<Long> findNotAvailableCars(Timestamp dateIn,Timestamp dateOut);
+    List<Disponibility> findByUserId(Long userId);
 }
 
 

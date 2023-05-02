@@ -72,4 +72,18 @@ public class CarServiceImpl implements CarService {
             return isAvailable;
         }).toList();
     }
+
+    @Override
+    public List<Car> getByIds(List<Long> ids) {
+        List<Car> response = new Vector<Car>();
+        ids.forEach(id -> {
+            response.add(carRepo.findById(id).get());
+        });
+        return response;
+    }
+
+    @Override
+    public Car getById(Long id) {
+        return carRepo.findById(id).orElse(null);
+    }
 }

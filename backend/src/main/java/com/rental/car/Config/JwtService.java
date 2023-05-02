@@ -13,6 +13,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.security.KeyPair;
 import java.security.PrivateKey;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,11 +34,15 @@ public class JwtService {
     }
 
     public String generateToken(Map<String,Object> extraClaims, UserDetails user){
+        Date today,tomorrow;
+        today = new Date(System.currentTimeMillis());
+        tomorrow = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
+
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())     //the subject is the user info
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setIssuedAt(today)
+                .setExpiration(tomorrow)
                 .signWith(getSignInKey(), SignatureAlgorithm.HS512)
                 .compact();
     }

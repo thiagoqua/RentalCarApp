@@ -23,9 +23,9 @@ public class CarController {
         return service.getAllCars();
     }
 
-    @GetMapping("/category/{cat}")
-    private List<Car> getByCategory(@PathVariable String cat){
-        return service.getByCategory(cat);
+    @GetMapping("/category")
+    private List<Car> getByCategory(@RequestParam String category){
+        return service.getByCategory(category);
     }
 
     @GetMapping("/price/{maxPrice}")
@@ -35,6 +35,16 @@ public class CarController {
 
     @GetMapping("/categories")
     private List<String> getCategories(){return service.getCategories();}
+
+    @GetMapping("/id")
+    private Car getById(@RequestParam Long id){
+        return service.getById(id);
+    }
+
+    @PostMapping("/idmulti")
+    private List<Car> getByIds(@RequestBody List<Long> ids){
+        return service.getByIds(ids);
+    }
 
     @GetMapping("/test")
     private ResponseEntity<String> test(){

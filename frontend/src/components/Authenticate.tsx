@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { LogIn } from "../pages/LogIn";
 import { SignUp } from "../pages/SignUp";
+import { User } from "../models/User";
+import { comingFrom } from "../extra/constants";
 
 interface Prop{
-  handleFinished:() => void;
+  handleFinished:(user:User) => void;
 }
 
 export function Authenticate({handleFinished}:Prop):JSX.Element{
@@ -15,8 +17,8 @@ export function Authenticate({handleFinished}:Prop):JSX.Element{
     setSignUpCompleted(true);
   }
 
-  const onLogInCompleted = () => {
-    handleFinished();
+  const onLogInCompleted = (user:User) => {
+    handleFinished(user);
   }
 
   return (
@@ -31,10 +33,10 @@ export function Authenticate({handleFinished}:Prop):JSX.Element{
               <button onClick={() => setWantsToLogin(false)}>sign in</button>
             </>
             : wantsToLogin 
-            ? <LogIn handleFinished={onLogInCompleted}/> 
+            ? <LogIn handleFinished={onLogInCompleted} whoCallsMe={comingFrom.USER}/> 
             : <SignUp handleFinished={onSignUpCompleted}/>}
         </>
-        : <LogIn handleFinished={onLogInCompleted}/>
+        : <LogIn handleFinished={onLogInCompleted} whoCallsMe={comingFrom.SIGNUP}/>
       }
     </div>
   );

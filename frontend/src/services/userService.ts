@@ -1,9 +1,11 @@
-import { APIURL } from "../components/extra/constants";
+import { APIURL } from "../extra/constants";
+import { AuthenticationRequest } from "../models/AuthenticationRequest";
+import { RegisterRequest } from "../models/RegisterRequest";
 import { User } from "../models/User";
 
 export class UserService{
 
-  public signUp(user:User):Promise<any>{          //its any becouse it can return an error
+  public signUp(user:RegisterRequest):Promise<{id:number,token:string}>{          //its any becouse it can return an error
     return fetch(`${APIURL}/user/register`,{
       method: 'POST',
       headers: {'Content-Type':'application/json'},
@@ -11,11 +13,11 @@ export class UserService{
     }).then(data => data.json());
   }
 
-  public logIn(user:User):Promise<{id:number,token:string}>{
+  public logIn(authRequest:AuthenticationRequest):Promise<Response>{
     return fetch(`${APIURL}/user/authenticate`,{
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(user)
-    }).then(data => data.json())
+      body: JSON.stringify(authRequest)
+    });
   }
 }

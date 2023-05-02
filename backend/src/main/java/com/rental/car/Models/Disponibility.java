@@ -14,8 +14,12 @@ public class Disponibility {
     private Long id;
     @Column(name = "car")
     private Long carId;
+    @Column(name = "user")
+    private Long userId;
+    @Column(name = "datein")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Timestamp datein;
+    private Timestamp dateIn;
+    @Column(name = "dateout")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Timestamp dateout;
+    private Timestamp dateOut;
 }

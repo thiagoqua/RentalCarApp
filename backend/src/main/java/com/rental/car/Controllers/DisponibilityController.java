@@ -27,4 +27,14 @@ public class DisponibilityController {
     private void reserveCar(@RequestBody Disponibility toReserve){
         dispoService.reserve(toReserve);
     }
+
+    @GetMapping("/all")
+    private List<Disponibility> getAlByUser(@RequestParam Long userid){
+        return dispoService.getAllByUser(userid);
+    }
+
+    @PostMapping("/test")
+    private ResponseEntity<String> a(@RequestBody String saying){
+        return ResponseEntity.ok(saying);
+    }
 }

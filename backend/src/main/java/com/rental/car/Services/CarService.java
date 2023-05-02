@@ -10,4 +10,7 @@ public interface CarService {
     List<Car> getByPriceLessThan(Double maxPrice);
     List<String> getCategories();
     List<Car> getCarsByDisponibility(String dateInStr,String dateOutStr);
+    List<Car> getByIds(List<Long> ids);
+
+    Car getById(Long id);
 }
