@@ -10,7 +10,7 @@ export class UserService{
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(user)
-    }).then(data => data.json());
+    }).then(res => res.json());
   }
 
   public logIn(authRequest:AuthenticationRequest):Promise<Response>{
@@ -19,5 +19,10 @@ export class UserService{
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(authRequest)
     });
+  }
+
+  public checkTokenValidation(user:User):Promise<boolean>{
+    return fetch(`${APIURL}/user/validate?userid=${user.id}&token=${user.token}`)
+            .then(res => res.json());
   }
 }

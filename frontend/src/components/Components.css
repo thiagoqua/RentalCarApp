@@ -12,6 +12,12 @@ div{
     width: 90%;
 }
 
+.user-info{
+    display: flex;
+    flex-direction: row;
+    gap:2rem;
+}
+
 .about{
     margin-top:10%;
 }

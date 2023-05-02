@@ -1,26 +1,30 @@
-import { Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap"
 import { User } from "../models/User";
 import "./Components.css";
 import { useEffect, useState } from "react";
 import { Authenticate } from "./Authenticate";
 import { Link } from "react-router-dom";
+import { UserService } from "../services/userService";
 
 export function Navbar(): JSX.Element {
   const [userLogged,setUserLogged] = useState<User>();
+  const service:UserService = new UserService();
   
   const handleLogOut = () => {
     localStorage.removeItem("user");
     setUserLogged(undefined);
   }
 
-  const handleLogIn = () => {
-
-  }
-
   useEffect(() => {
     const userString: string | null = localStorage.getItem("user");
-    if(userString != null)
-        setUserLogged((JSON.parse(userString) as User))
+    if(userString != null){
+      //check for the validation of the token
+      service.checkTokenValidation(JSON.parse(userString) as User)
+        .then((valid:boolean) => {
+          if(valid)
+            setUserLogged((JSON.parse(userString) as User))
+        })
+    }
   },[])
 
   return (
@@ -32,19 +36,13 @@ export function Navbar(): JSX.Element {
       <a href="#contact">Contact</a>
       <div>
         {userLogged 
-        ? <Row>
-            <Col>
+        ? <div className="user-info">
                 <h5>hi, {userLogged.firstname}</h5>
-            </Col>
-            <Col>
                 <button onClick={handleLogOut}>log out</button>
-            </Col>
-            <Col>
                 <Link to="/me">
                     <button>my rents</button>
                 </Link>
-            </Col>
-        </Row>
+        </div>
         : <Link to="/authenticate">
             <button>log in or sign up</button>
         </Link>

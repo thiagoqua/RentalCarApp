@@ -17,4 +17,8 @@ public class UserService implements UserDetailsService {
         return repo.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException("USER NOT FOUND"));
     }
+
+    public UserDetails loadById(Long id){
+        return repo.findById(id).get();
+    }
 }

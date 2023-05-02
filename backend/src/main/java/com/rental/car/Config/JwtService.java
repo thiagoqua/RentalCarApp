@@ -1,10 +1,13 @@
 package com.rental.car.Config;
 
+import com.rental.car.Services.Impl.UserService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -21,7 +24,9 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    @Value("${application.security.jwt.secret-key}")
+    @Autowired
+    private UserService userService;
+
     private static final String SECRET_KEY = "7336763979244226452948404D6351665468576D5A7134743777217A25432A462D4A614E645267556B586E3272357538782F413F4428472B4B6250655368566D";
 
     public String extractUsername(String token) {
@@ -55,6 +60,17 @@ public class JwtService {
         final String username = extractUsername(token);
         return username.equals(user.getUsername()) &&
                 !isTokenExpired(token);
+    }
+
+    public boolean isTokenValid(String token, Long userId){
+        boolean valid;
+        try{
+            isTokenValid(token,userService.loadById(userId));
+            valid = true;
+        } catch(ExpiredJwtException eje){
+            valid = false;
+        }
+        return valid;
     }
 
     private boolean isTokenExpired(String token){
