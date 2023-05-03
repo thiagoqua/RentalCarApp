@@ -7,4 +7,5 @@ import java.util.List;
 public interface DisponibilityService {
     void reserve(Disponibility dispo);
     List<Disponibility> getAllByUser(Long userId);
+    void delete(Long id);
 }

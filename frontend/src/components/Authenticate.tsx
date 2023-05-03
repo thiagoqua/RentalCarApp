@@ -6,9 +6,10 @@ import { comingFrom } from "../extra/constants";
 
 interface Prop{
   handleFinished:(user:User) => void;
+  title:string;
 }
 
-export function Authenticate({handleFinished}:Prop):JSX.Element{
+export function Authenticate({handleFinished,title}:Prop):JSX.Element{
   //true if user wants to login, false if user wants to sign in
   const [wantsToLogin,setWantsToLogin] = useState<boolean>();  
   const [signUpCompleted,setSignUpCompleted] = useState<boolean>(false);  
@@ -25,7 +26,7 @@ export function Authenticate({handleFinished}:Prop):JSX.Element{
     <div>
       {!signUpCompleted ?
         <>
-          <h1>to continue u have to login or register</h1>
+          <h1>{title}</h1>
             {wantsToLogin == undefined 
             ? 
             <>

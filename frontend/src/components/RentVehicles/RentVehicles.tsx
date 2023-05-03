@@ -76,8 +76,8 @@ export function RentVehicles(): JSX.Element {
     const dispo:Disponibility = new Disponibility(
       carSelected!.id,
       dropInDate.value + " 09:00:00",
-      dropOffDate.value + " 09:00:00");
-   
+      dropOffDate.value + " 09:00:00"
+    );
     localStorage.setItem("dispo",JSON.stringify(dispo));
   };
 

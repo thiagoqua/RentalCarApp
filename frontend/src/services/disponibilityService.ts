@@ -26,4 +26,14 @@ export class DisponibilityService{
       })
     }).then((res:Response) => res.json());
   }
+
+  public deleteById(id:number,userToken:string){
+    return fetch(`${APIURL}/disponibility/delete?id=${id}`,
+    {
+      headers:new Headers({
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${userToken}`
+      })
+    });
+  }
 }

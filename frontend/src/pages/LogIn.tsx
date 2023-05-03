@@ -13,15 +13,15 @@ interface Props{
 export function LogIn({handleFinished,whoCallsMe}:Props):JSX.Element{
   const {register, formState:{ errors }, handleSubmit} = useForm();
   //user if the data is correct and the user is logged. null if there isnt a user with that email
-  const [userLogged,setUserLogged] = useState<boolean>();       
+  const [userLogged,setUserLogged] = useState<boolean>();
+  const [error,setError] = useState<string>();
   
   const handleData = (formData:any) => {
     const service:UserService = new UserService();
     const authRequest:AuthenticationRequest = new AuthenticationRequest(formData.email,formData.password);
     service.logIn(authRequest).then((res:Response) => {
-      if(!res.ok){
+      if(!res.ok)
         setUserLogged(false);
-      }
       else
         res.json().then((user:User) => {
           handleFinished(user);
@@ -29,7 +29,7 @@ export function LogIn({handleFinished,whoCallsMe}:Props):JSX.Element{
           if(formData.remember)
             localStorage.setItem("user",JSON.stringify(user));
         });
-    })
+    },(reason:string) => setError(reason));
   }
   
   return (
@@ -58,6 +58,7 @@ export function LogIn({handleFinished,whoCallsMe}:Props):JSX.Element{
         </div>
         {userLogged == false && <h5>invalid credentials</h5>}
         <input type="submit" value="log in"/>
+        {error && <h4 style={{color:'red'}}>Se produjo un error al enviar la petición al servidor</h4>}
       </form>
     </>
   )

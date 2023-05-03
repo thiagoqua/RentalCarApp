@@ -1,8 +1,6 @@
-import { Col, Row } from "react-bootstrap"
 import { User } from "../models/User";
 import "./Components.css";
 import { useEffect, useState } from "react";
-import { Authenticate } from "./Authenticate";
 import { Link } from "react-router-dom";
 import { UserService } from "../services/userService";
 

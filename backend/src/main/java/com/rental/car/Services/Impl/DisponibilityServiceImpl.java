@@ -22,4 +22,9 @@ public class DisponibilityServiceImpl implements DisponibilityService {
     public List<Disponibility> getAllByUser(Long userId) {
         return repo.findByUserId(userId);
     }
+
+    @Override
+    public void delete(Long id) {
+        repo.deleteById(id);
+    }
 }

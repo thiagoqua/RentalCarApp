@@ -1,7 +1,49 @@
+section{
+  margin-bottom:5%;
+}
+
 .home-section{
   height: 100vh;
 }
 
 .lead{
   font-size: x-large;
+}
+
+.rents-list{
+  display:flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+}
+
+.rents-item{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo{
+  width: 70%;
+}
+
+.sort-option{
+  cursor:pointer;
+}
+
+.sort-option-clicked{
+  color:blue;
+  font-weight: bold;
+}
+
+@media (max-width:540px){
+  .rents-list{
+    flex-direction: column;
+  }
+
+  .rents-item{
+    width: 100%;
+    margin-bottom:10%;
+  }
 }

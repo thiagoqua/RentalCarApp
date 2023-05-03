@@ -33,6 +33,11 @@ public class DisponibilityController {
         return dispoService.getAllByUser(userid);
     }
 
+    @GetMapping("/delete")
+    private void delete(@RequestParam Long id){
+        dispoService.delete(id);
+    }
+
     @PostMapping("/test")
     private ResponseEntity<String> a(@RequestBody String saying){
         return ResponseEntity.ok(saying);
