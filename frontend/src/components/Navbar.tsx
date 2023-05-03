@@ -3,6 +3,7 @@ import "./Components.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserService } from "../services/userService";
+import { getUserLogged } from "../extra/methods";
 
 export function Navbar(): JSX.Element {
   const [userLogged,setUserLogged] = useState<User>();
@@ -14,13 +15,13 @@ export function Navbar(): JSX.Element {
   }
 
   useEffect(() => {
-    const userString: string | null = localStorage.getItem("user");
-    if(userString != null){
+    const user:User|null = getUserLogged();
+    if(user){
       //check for the validation of the token
-      service.checkTokenValidation(JSON.parse(userString) as User)
+      service.checkTokenValidation(user)
         .then((valid:boolean) => {
           if(valid)
-            setUserLogged((JSON.parse(userString) as User))
+            setUserLogged(user)
         })
     }
   },[])

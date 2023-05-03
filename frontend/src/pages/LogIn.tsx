@@ -4,6 +4,7 @@ import { AuthenticationRequest } from "../models/AuthenticationRequest";
 import { User } from "../models/User";
 import { useState } from "react";
 import { comingFrom } from "../extra/constants";
+import { storeUserLogged } from "../extra/methods";
 
 interface Props{
   handleFinished:(user:User) => void;
@@ -27,7 +28,7 @@ export function LogIn({handleFinished,whoCallsMe}:Props):JSX.Element{
           handleFinished(user);
           setUserLogged(true);
           if(formData.remember)
-            localStorage.setItem("user",JSON.stringify(user));
+            storeUserLogged(user);
         });
     },(reason:string) => setError(reason));
   }

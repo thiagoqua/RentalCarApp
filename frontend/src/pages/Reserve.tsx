@@ -6,6 +6,7 @@ import { DisponibilityInfo } from "../components/DisponibilityInfo";
 import { DisponibilityService } from "../services/disponibilityService";
 import { Link, Navigate } from "react-router-dom";
 import { NotFoundPage } from "./NotFoundPage";
+import { getDispo, getUserLogged, removeObject } from "../extra/methods";
 
 export function Reserve():JSX.Element{
   const [userLogged,setUserLogged] = useState<User>();
@@ -19,24 +20,22 @@ export function Reserve():JSX.Element{
   }
 
   const onLoggedIn = (user:User) => {
-    const dispo:Disponibility = (JSON.parse(localStorage.getItem("dispo")!) as Disponibility);
+    const dispo:Disponibility = getDispo()!;
     dispo.userId = user.id;
     setUserLogged(user);
     setDispoInCuestion(dispo)
-    localStorage.removeItem("dispo");
+    removeObject("dispo");
   }
 
   useEffect(() => {
-    const checkUserLogged:string|null = localStorage.getItem("user");
-    const dispoStr:string|null = localStorage.getItem("dispo");
-    if(dispoStr != null){   //if null becouse trying to access via url
-      const dispo:Disponibility = JSON.parse(dispoStr) as Disponibility;
+    const user:User|null = getUserLogged();
+    const dispo:Disponibility|null = getDispo();
+    if(dispo){   //if null becouse trying to access via url
       setDispoInCuestion(dispo);
-      if(checkUserLogged != null){
-        const user:User = JSON.parse(checkUserLogged) as User;
+      if(user){
         dispo.userId = user.id;
         setUserLogged(user);
-        localStorage.removeItem("dispo");
+        removeObject("dispo")
       }
     }
   },[])

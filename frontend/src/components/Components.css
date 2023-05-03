@@ -129,6 +129,54 @@ div{
     text-align: center;
 }
 
+.loader {
+    width: 30vh;
+    height: 30vh;
+    margin-left:40%;
+    color: #F44DE6; 
+    border-radius: 50%;
+    background:
+      linear-gradient(currentColor 0 0),
+      linear-gradient(currentColor 0 0),
+      linear-gradient(currentColor 0 0);
+    background-size: 50.1% 50.1%;
+    background-repeat: no-repeat;
+    animation: 
+      f9-0   1.5s infinite linear alternate,
+      f9-0-0 3s   infinite linear alternate;
+  }
+  .loader::before {
+    content:"";
+    display:block;
+    width:50%;
+    height:50%;
+    background:currentColor;
+    border-top-left-radius: 200px;
+    transform:perspective(300px) rotateY(0deg) rotateX(0deg);
+    transform-origin: bottom right; 
+    animation: f9-1 1.5s infinite linear alternate;
+  }
+  
+  
+  @keyframes f9-0 {
+    0% ,32.99% {background-position: 0    100%,100% 100%,100% 0}
+    33%,65.99% {background-position: 100% 100%,100% 100%,100% 0}
+    66%,100%   {background-position: 100% 0   ,100% 0   ,100% 0}
+  }
+  
+  @keyframes f9-0-0 {
+    0%,49.99% {transform: scaleX(1)  rotate(0deg)}
+    50%,100%  {transform: scaleX(-1) rotate(-90deg)}
+  }
+  
+  
+  @keyframes f9-1 {
+    16.5%{transform:perspective(150px) rotateX(-90deg)  rotateY(0deg)    rotateX(0deg);filter:grayscale(0.8)}
+    33%  {transform:perspective(150px) rotateX(-180deg) rotateY(0deg)    rotateX(0deg)}
+    66%  {transform:perspective(150px) rotateX(-180deg) rotateY(-180deg) rotateX(0deg)}
+    100% {transform:perspective(150px) rotateX(-180deg) rotateY(-180deg) rotateX(-180deg);filter:grayscale(0.8)}
+  }
+
 /* equivale al sm de bootstrap */
 @media (max-width:540px){
     .vi-container{

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { SeletData } from "./SelectData";
 import { CarList } from "../CarList";
 import { Disponibility } from "../../models/Disponibility";
+import { storeDispo } from "../../extra/methods";
 
 export function RentVehicles(): JSX.Element {
   const [vehiclesAvailable, setVehiclesAvailable] = useState<Car[]>([]); //vehicles available from the dates selected
@@ -78,7 +79,7 @@ export function RentVehicles(): JSX.Element {
       dropInDate.value + " 09:00:00",
       dropOffDate.value + " 09:00:00"
     );
-    localStorage.setItem("dispo",JSON.stringify(dispo));
+    storeDispo(dispo);
   };
 
   return (
