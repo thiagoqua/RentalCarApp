@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Car } from "../../models/Car";
 import { CarService } from "../../services/carService";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { CATEGORIES } from "../../extra/constants";
+import { Container, Row, Col } from "react-bootstrap";
 import { VehicleInfo } from "./VehicleInfo";
 import { Link } from "react-router-dom";
 import { SeletData } from "./SelectData";
@@ -15,7 +14,7 @@ export function RentVehicles(): JSX.Element {
   const [vehiclesFiltered, setVehiclesFiltered] = useState<Car[]>([]); //the vehicles available but with filters
   const [datesCompleted, setDatesCompleted] = useState(false);
   const [carSelected, setCarSelected] = useState<Car>();
-  const [inDate, setInDate] = useState<string>();
+  const [inDate, setInDate] = useState<Date>();
   const [sorted, setSorted] = useState<boolean>(true); //true if is sorted by higher price
 
   const service: CarService = new CarService();
@@ -24,14 +23,13 @@ export function RentVehicles(): JSX.Element {
     //if the function is called by the first input type date
     const dropInDate: any = document.getElementById("dropInDate");
     if (isFirstDate) {
-      setInDate(dropInDate.value);
+      setInDate(dropInDate.valueAsDate);
     } else {
       const dropOffDate: any = document.getElementById("dropOffDate");
 
       if (dropInDate.value && dropOffDate.value) {
         setDatesCompleted(true);
-        service
-          .getCarsDisponibility(dropInDate.value, dropOffDate.value)
+        service.getCarsDisponibility(dropInDate.value, dropOffDate.value)
           .then((cars: Car[]) => {
             setVehiclesAvailable(cars);
             setVehiclesFiltered(cars);
@@ -84,7 +82,7 @@ export function RentVehicles(): JSX.Element {
 
   return (
     <div id="rent">
-      <h1 className="head-title">The rent vehicles section</h1>
+      <h1 className="head-title">Rent!</h1>
       <Container fluid>
         <Row>
           <Col lg={3}>
@@ -97,18 +95,18 @@ export function RentVehicles(): JSX.Element {
           </Col>
           <Col lg={2}>
             <div className="rv-select-car">
-              <h5>select car</h5>
+              <h5>Select Car</h5>
               <h6>sort by </h6>
               <span
                 onClick={() => handleSorting(false)}
-                className={`item ${!sorted ? "item-clicked" : "item-decliked"}`}
+                className={!sorted ? "sorting sorting-clicked" : "sorting"}
               >
                 higher price
               </span>
               <span> - </span>
               <span
                 onClick={() => handleSorting(true)}
-                className={`item ${sorted ? "item-clicked" : "item-decliked"}`}
+                className={sorted ? "sorting sorting-clicked" : "sorting"}
               >
                 lower price
               </span>
@@ -129,7 +127,11 @@ export function RentVehicles(): JSX.Element {
                 <img src={carSelected?.imageURL}/>
               </div>
               <Link to="/reserve">
-                <button className="rv-rent-button" onClick={handleRent}>rent</button>
+              <button className="animated-button-1" onClick={handleRent}>rent this car
+                <div className="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
+                </div>
+              </button>
               </Link>
             </>
             :

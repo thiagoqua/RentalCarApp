@@ -76,22 +76,22 @@ export function MyRents():JSX.Element{
     <div>
       {userLogged ? 
       <>
-        <h1>{userLogged?.firstname}, your rents are</h1>
-        <section>
+        <div className="flexdiv">
+          <h1>{userLogged?.firstname}</h1><h1 className="normal">, your rents are</h1>
+        </div>
           <Link to='/'>
-            <button>go to home page</button>
+            <button className="animated-button-def">go to home page</button>
           </Link>
-        </section>
         <section>
           <div>
-            <h5>sorted by rent date</h5>
-            <span className={sorted ? 'sort-option-clicked' : 'sort-option'}
+            <h6>Sorted by rent date</h6>
+            <span className={sorted ? 'sorting-clicked' : 'sorting'}
                   onClick={() => handleSorting(true)}
             >
               lasts
             </span>
             -
-            <span className={!sorted ? 'sort-option-clicked' : 'sort-option'}
+            <span className={!sorted ? 'sorting-clicked' : 'sorting'}
                   onClick={() => handleSorting(false)}
             >
               firsts

@@ -19,7 +19,7 @@ export function CarList({ vehicles, handle, passingIndex ,carId }: myProps): JSX
           }}
           className={`item ${carId == car.id ? 'item-clicked' : 'item-decliked'}`}
         >
-          {car.brand} {car.model}
+          {car.brand.toUpperCase()} {car.model.toUpperCase()}
         </span>
       ))}
     </>

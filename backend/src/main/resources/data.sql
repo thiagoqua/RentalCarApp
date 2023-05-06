@@ -30,7 +30,8 @@ INSERT INTO CAR (category,brand,model,born,price,doors,transmission,fueltype,AC,
 VALUES ('familiar','mini','countryman cooper s',2024,74.0,4,'automatic','gasoline',TRUE,31,23,'https://s3.us-east-2.amazonaws.com/dealer-inspire-vps-vehicle-images/stock-images/chrome/51d44dd9f49c47a7b2e462e253756383.png');
 INSERT INTO CAR (category,brand,model,born,price,doors,transmission,fueltype,AC,urban,route,image)
 VALUES ('pickUp','toyota','hilux',2021,70.2,4,'automatic','diesel',TRUE,19,14,'https://cdn.deagenciapa.com//wp-content/uploads/2021/02/Hilix-full-icon.png');
-
+INSERT INTO CAR (category,brand,model,born,price,doors,transmission,fueltype,AC,urban,route,image)
+VALUES ('sedan','ford','mondeo',2017,69.2,4,'automatic','gasoil',TRUE,21,17,'https://cdn.meinauto.de/car-pics/___Pix-NoBrand/FORD/MONDEO/4/4Sedan%20Vignale/ford_16mondeovignalesa4b_angularfront_nb-800.jpg');
 
 
 --          PROTOTYPES

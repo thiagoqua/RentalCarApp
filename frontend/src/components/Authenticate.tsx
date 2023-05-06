@@ -3,10 +3,11 @@ import { LogIn } from "../pages/LogIn";
 import { SignUp } from "../pages/SignUp";
 import { User } from "../models/User";
 import { comingFrom } from "../extra/constants";
+import './Components.css'
 
 interface Prop{
   handleFinished:(user:User) => void;
-  title:string;
+  title?:string;
 }
 
 export function Authenticate({handleFinished,title}:Prop):JSX.Element{
@@ -23,16 +24,22 @@ export function Authenticate({handleFinished,title}:Prop):JSX.Element{
   }
 
   return (
-    <div>
+    <div className="auth-container">
       {!signUpCompleted ?
         <>
-          <h1>{title}</h1>
+          <h1>{!wantsToLogin && title}</h1>
             {wantsToLogin == undefined 
             ? 
-            <>
-              <button onClick={() => setWantsToLogin(true)}>log in</button>
-              <button onClick={() => setWantsToLogin(false)}>sign in</button>
-            </>
+            <div>
+              <button onClick={() => setWantsToLogin(true)}
+                      className="animated-button-def">
+                Log In
+              </button>
+              <button onClick={() => setWantsToLogin(false)}
+                      className="animated-button-def">
+                Sign Up
+              </button>
+            </div>
             : wantsToLogin 
             ? <LogIn handleFinished={onLogInCompleted} whoCallsMe={comingFrom.USER}/> 
             : <SignUp handleFinished={onSignUpCompleted}/>}

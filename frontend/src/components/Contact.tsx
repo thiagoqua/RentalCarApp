@@ -1,4 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
+import './Components.css'
 
 export function Contact():JSX.Element{
   return (
@@ -17,6 +18,7 @@ export function Contact():JSX.Element{
           <b>Mon - Fri</b><span> 08:00 to 20:00</span>
           <br/>
           <b>Sat</b><span> 08:00 to 12:00</span>
+          <br/>
           <b>Sun</b><span> closed</span>
         </Col>
         <Col className="c-info" lg={4} md={6} sm={12}>

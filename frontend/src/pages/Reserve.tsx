@@ -45,28 +45,28 @@ export function Reserve():JSX.Element{
       {!dispoInCuestion
         ? <NotFoundPage/>
         : !userLogged 
-          ? <Authenticate title="to continue, you have to log in or register" 
+          ? <Authenticate title="to continue, you have to Log In or register" 
                           handleFinished={onLoggedIn}/> 
           : confirmed == undefined 
             ? 
               <>
-                <h1>complete your reserve, {userLogged.firstname}</h1>
+                <h1 className="normal">complete your reserve,</h1><h1> {userLogged.firstname}</h1>
                 <div>
-                  <h4>Make reserve of:</h4>
+                  <h2 className="normal">Make reserve of:</h2>
                   <DisponibilityInfo dispo={dispoInCuestion!}/>
                 </div>
                 <Link to="/">
-                  <button>cancel</button>
+                  <button className="animated-button-def">cancel</button>
                 </Link>
-                <button onClick={handleConfirm}>confirm</button>
+                <button onClick={handleConfirm} className="animated-button-def">confirm</button>
               </>
             : confirmed 
               ?
                 <>
                   <h1>Reserved succesfully!</h1>
-                  <h5>we will redirect you to the home page</h5>
+                  <h5 className="normal">we will redirect you to the home page</h5>
                   <Link to='/'>
-                    <button>go to home page</button>
+                    <button className="animated-button-def">go to home page</button>
                   </Link>
                 </>
               :
@@ -74,7 +74,7 @@ export function Reserve():JSX.Element{
                   <h1>We cannot make your reserve</h1>
                   <h5>Please try again later</h5>
                   <Link to='/'>
-                    <button>go to home page</button>
+                    <button className="animated-button-def">go to home page</button>
                   </Link>
                 </>
       }

@@ -7,7 +7,7 @@ export function About(): JSX.Element {
         <Container>
           <Row>
             <Col lg={12}>
-              <h2>About Rosario on Wheels</h2>
+              <h1>About Rosario on Wheels</h1>
               <p className="lead">
                 Rosario on Wheels is the premier car rental service in Rosario,
                 Santa Fe. Our mission is to provide high-quality, reliable, and
@@ -16,6 +16,13 @@ export function About(): JSX.Element {
             </Col>
           </Row>
           <Row>
+          <Col lg={6}>
+              <img
+                src="https://cdn.pixabay.com/photo/2021/01/04/19/18/city-5888619_1280.png"
+                alt="Rosario on Wheels office"
+                className="img-fluid"
+              />
+            </Col>
             <Col lg={6}>
               <p>
                 We are located in the heart of Rosario, making it convenient for
@@ -30,13 +37,6 @@ export function About(): JSX.Element {
                 beyond to ensure that our customers have a seamless rental
                 experience.
               </p>
-            </Col>
-            <Col lg={6}>
-              <img
-                src="https://www.example.com/about.jpg"
-                alt="Rosario on Wheels office"
-                className="img-fluid"
-              />
             </Col>
           </Row>
       </Container>

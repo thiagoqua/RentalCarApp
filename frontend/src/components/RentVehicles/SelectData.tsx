@@ -4,16 +4,21 @@ import { CATEGORIES } from "../../extra/constants";
 interface myProps {
   handleDates: (inDate:boolean) => void;
   handleCategory: (which:string) => void;
-  inDate?: string;
+  inDate?: Date;
   datesCompleted:boolean;
 }
 
 export function SeletData({ handleDates,handleCategory,inDate,datesCompleted }:myProps): JSX.Element {
+  const outDate:Date = new Date();
+  
+  if(inDate)
+    outDate.setDate(inDate.getDate() + 2)
+
   return (
     <div>
       <Col lg={12} className="rv-section">
         <div className="rv-section-data">
-          <span>drop in date</span>
+          <span>Drop in date</span>
           <input
             type="date"
             id="dropInDate"
@@ -21,15 +26,18 @@ export function SeletData({ handleDates,handleCategory,inDate,datesCompleted }:m
               handleDates(true);
             }}
             min={new Date().toJSON().slice(0, 10)}
+            className="selection"
           />
         </div>
         <div className="rv-section-data">
-          <span>drop off date</span>
+          <span>Drop off date</span>
           <input
             type="date"
             id="dropOffDate"
             onChange={() => handleDates(false)}
-            min={inDate}
+            min={outDate.toJSON().slice(0, 10)}
+            disabled={inDate ? false : true}
+            className="selection"
           />
         </div>
       </Col>
@@ -37,10 +45,10 @@ export function SeletData({ handleDates,handleCategory,inDate,datesCompleted }:m
         <h4>Filters (optional)</h4>
         <Col className="rv-section">
           <div className="rv-section-data">
-            <span>car type</span>
-            <select disabled={!datesCompleted}>
+            <span>Car Type</span>
+            <select disabled={!datesCompleted} className="selection">
               {CATEGORIES.map((category) => (
-                <option onClick={() =>handleCategory(category)} key={category}>
+                <option onClick={() =>handleCategory(category)} key={category} id="op">
                   {category}
                 </option>
               ))}

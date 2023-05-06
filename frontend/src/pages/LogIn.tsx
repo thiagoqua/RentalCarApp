@@ -36,30 +36,31 @@ export function LogIn({handleFinished,whoCallsMe}:Props):JSX.Element{
   return (
     <>
       {whoCallsMe == comingFrom.SIGNUP && <h1>Registration succesfull!</h1>}
-      <h1>you are being login</h1>
+      <h1>Log In</h1>
       <form onSubmit={handleSubmit(handleData)}>
         <div>
-          <label>Email</label>
-          <input type="email" {...register('email',{
+          <input type="email" placeholder="email"{...register('email',{
             required:true,
             pattern:/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
           })}/>
-          {errors.email?.type === "required" && <p>Completing this field is required</p>}
-          {errors.email?.type === "pattern" && <p>Insert a valid email</p>}
+          {errors.email?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
+          {errors.email?.type === "pattern" && <h4 className="advice">Insert a valid email</h4>}
         </div>
         <div>
-          <label>Password</label>
-          <input type="password" {...register('password',{
+          <input type="password" placeholder="password" {...register('password',{
             required:true
           })}/>
-          {errors.password?.type === "required" && <p>Completing this field is required</p>}
+          {errors.password?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
         </div>
         <div>
-          <input type="checkbox" {...register('remember')}/><label>keep me logged in</label>
+          <label className="checkbox-container keep">
+            <input type="checkbox" {...register('remember')}/><h4>keep me logged in</h4>
+            <div className="checkmark"></div>
+          </label>  
         </div>
         {userLogged == false && <h5>invalid credentials</h5>}
-        <input type="submit" value="log in"/>
-        {error && <h4 style={{color:'red'}}>Se produjo un error al enviar la petición al servidor</h4>}
+        <input type="submit" value="log in" className="animated-button-def"/>
+        {error && <h4 className="advice">Se produjo un error al enviar la petición al servidor</h4>}
       </form>
     </>
   )

@@ -36,15 +36,15 @@ export function Navbar(): JSX.Element {
       <div>
         {userLogged 
         ? <div className="user-info">
-                <h5>hi, {userLogged.firstname}</h5>
-                <button onClick={handleLogOut}>log out</button>
+                <h5 className="lead">hi, </h5><h5> {userLogged.firstname}</h5>
+                <button onClick={handleLogOut} className="animated-button-def">log out</button>
                 <Link to="/me">
-                    <button>my rents</button>
+                    <button className="animated-button-def">my rents</button>
                 </Link>
-        </div>
+          </div>
         : <Link to="/authenticate">
-            <button>log in or sign up</button>
-        </Link>
+            <button className="animated-button-def">Log In or Sign Up</button>
+          </Link>
         }
       </div>
     </div>

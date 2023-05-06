@@ -7,35 +7,53 @@ div{
 }
 
 .navbar{
-    justify-content: space-between;
-    position: fixed;
-    width: 90%;
+    width: 98%;
+    margin-left:1%;
+    margin-bottom: 5%;
+    height: max-content;
+    font-size: 120%;
+}
+
+.auth-container{
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .user-info{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     gap:2rem;
+}
+
+.gallery{
+    height: fit-content;
 }
 
 .about{
     margin-top:10%;
 }
 
-
-.head-title{
-    text-align: center;
+.vm-list{
+    height: 60vh;
+    overflow: scroll;
 }
 
 .item-list, .item-list-smaller{
     display: flex;
     flex-direction: column;
+    gap: 0.5em;
     justify-content: space-evenly;
-    overflow-y: auto;
+    overflow:scroll;
+    /* padding-top: 33%; */
 }
 
 .item-list{
-    max-height: 60vh;
+    font-weight: 500;
+    font-size: 150%;
+    max-height: 40%;
 }
 
 .item-list-smaller{
@@ -43,19 +61,49 @@ div{
 }
 
 .item-list span:hover,.item-list-smaller span:hover{
-    color:blueviolet;
+    color:#ffe74c;
 }
 
-.item{
+.item {
+    background-color: #e5e6fc;
+    color:#2b2d42;
+    border-radius: 4px;
     cursor: pointer;
+    padding: 5px 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 100%;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: none;
+}
+
+.lead{
+    font-weight: 500;
+    color:#2b2d42;
+}
+   
+.item:hover {
+    background-color: #ef233c;
+    color:#2b2d42;
 }
 
 .item-clicked{
-    color:red;
+    color:#ef233c;
+    background-color: #ffe74c;
 }
 
 .item-declicked{
-    color:black;
+    color:#2b2d42;
+}
+
+.sorting{
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.sorting-clicked{
+    font-weight: 700;
+    color:#ef233c;
 }
 
 .vm-car{
@@ -69,15 +117,36 @@ div{
 
 .rv-section{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
     margin-bottom: 15%;
+    gap:2rem;
 }
 
 .rv-section-data{
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.selection{
+    border:0cm;
+    margin-left:0%;
+    background-color: inherit;
+    height: 4rem;
+    font-size: 125%;
+    font-family: 'Braah One', sans-serif;
+    border-radius: 4px;
+    color: #ef233c;
+}
+
+.keep{
+    display:flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .rv-rent-button{
@@ -112,8 +181,9 @@ div{
 
 .vi-container{
     display:flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
+    height: 100%;
+    justify-content: space-evenly;
 }
 
 .vi-container{
@@ -130,33 +200,169 @@ div{
 }
 
 .loader {
-    width: 30vh;
-    height: 30vh;
-    margin-left:40%;
-    color: #F44DE6; 
-    border-radius: 50%;
-    background:
-      linear-gradient(currentColor 0 0),
-      linear-gradient(currentColor 0 0),
-      linear-gradient(currentColor 0 0);
-    background-size: 50.1% 50.1%;
-    background-repeat: no-repeat;
-    animation: 
-      f9-0   1.5s infinite linear alternate,
-      f9-0-0 3s   infinite linear alternate;
+    width:30vh;
+    height:30vh;
+    margin-left:42%;
+    border-radius:50%;
+    background:conic-gradient(#0000 10%,#ef233c);
+    mask:radial-gradient(farthest-side,#0000 calc(100% - 16px),#000 0);
+    animation:s3 1s infinite linear;
   }
-  .loader::before {
-    content:"";
-    display:block;
-    width:50%;
-    height:50%;
-    background:currentColor;
-    border-top-left-radius: 200px;
-    transform:perspective(300px) rotateY(0deg) rotateX(0deg);
-    transform-origin: bottom right; 
-    animation: f9-1 1.5s infinite linear alternate;
+  @keyframes s3 {to{transform: rotate(1turn)}}
+  
+#contact h3{
+    color:#d90429;
+}
+
+.advice{
+    color:#d90429;
+}
+
+.not{
+    display: flex;
+    flex-direction: column;
+}
+
+.not input{
+    height: 5.5rem;
+}
+
+.car-advice{
+    font-weight: 600;
+    color:#989a9e;
+}
+
+
+
+/* Hide the default checkbox */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
   }
   
+  .checkbox-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: relative;
+    box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
+    background-color: rgba(16, 16, 16, 0.5);
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    margin-top: -1px;
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+    transform-origin: 0px 10px;
+    border-radius: 4px;
+    margin: -1px 10px 0px 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  
+  .checkbox-container input:checked ~ .checkmark {
+    box-shadow: #ca616e 0px 0px 0px 2px;
+    background-color: #ef233c;
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    margin-top: -1px;
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+    transform-origin: 0px 10px;
+    border-radius: 4px;
+    margin: -1px 10px 0px 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  .accent{
+    color:#ef233c;
+  }
+
+  .disabled{
+    color: #989a9e;
+  }
+
+  .next-car-button {
+    margin-right: 5%;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: Helvetica,"sans-serif";
+    transition: all .2s;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: #ef233c;
+    border: 1px solid transparent;
+    align-items: center;
+    display: flex;
+    font-size: 15px;
+  }
+  
+  .next-car-button:hover {
+    background: #2b2d42;
+    color:#ef233c;
+  }
+  
+  .next-car-button > svg {
+    width: 34px;
+    margin-left: 10px;
+    transition: transform .3s ease-in-out;
+  }
+  
+  .next-car-button:hover svg {
+    fill:#ef233c;
+    transform: translateX(5px);
+  }
+  
+  .next-car-button:active {
+    transform: scale(0.95);
+  }
+  
+  .car-brand{
+    font-size: 300%;
+    font-weight: 600;
+    color:#ef233c;
+    margin-right: 5%;
+  }
+
+  .car-model{
+    font-size: 300%;
+    font-weight: 500;
+    color:#2b2d42;
+  }
+  
+  
+  /* Style the checkmark/indicator */
+  .checkbox-container .checkmark:after {
+    left: 0.45em;
+    top: 0.25em;
+    width: 0.25em;
+    height: 0.5em;
+    border: solid white;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+    transition: all 500ms ease-in-out;
+  }
   
   @keyframes f9-0 {
     0% ,32.99% {background-position: 0    100%,100% 100%,100% 0}
@@ -179,8 +385,21 @@ div{
 
 /* equivale al sm de bootstrap */
 @media (max-width:540px){
+    
+
+    .navbar div{
+        width: 100%;
+        margin-right:0px;
+    }
+    
+    .item-list{
+        padding-top: 105%;
+        height: 10%;
+    }
+
     .vi-container{
         margin-top: 10%;
+        background-color: rebeccapurple;
     }
 
     .vi-container div{

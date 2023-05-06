@@ -19,30 +19,30 @@ export function DisponibilityInfo({dispo}:{dispo:Disponibility}):JSX.Element{
     <Container>
       <Row>
         <Col>
-          <label>Car brand: </label><span>{car?.brand}</span>
+          <h5>Car brand: </h5><h5 className="normal">{car?.brand}</h5>
         </Col>
         <Col>
-          <label>Car model: </label><span>{car?.model}</span>
+          <h5>Car model: </h5><h5 className="normal">{car?.model}</h5>
         </Col>
         <Col>
-          <label>Year: </label><span>{car?.year}</span>
+          <h5>Year: </h5><h5 className="normal">{car?.year}</h5>
         </Col>
         <Col>
-          <label>Price per day: </label><span>{car?.pricePerDay}</span>
+          <h5>Price per day: </h5><h5 className="normal">{car?.pricePerDay}</h5>
         </Col>
       </Row>
       <Row>
         <Col>
-          <label>Doors: </label><span>{car?.doors}</span>
+          <h5>Doors: </h5><h5 className="normal">{car?.doors}</h5>
         </Col>
         <Col>
-          <label>Transmission: </label><span>{car?.transmission}</span>
+          <h5>Transmission: </h5><h5 className="normal">{car?.transmission}</h5>
         </Col>
         <Col>
-          <label>Fuel type: </label><span>{car?.fuelType}</span>
+          <h5>Fuel type: </h5><h5 className="normal">{car?.fuelType}</h5>
         </Col>
         <Col>
-          <label>Average consumition (route - urban): </label><span>{avgConsumition}</span>
+          <h5>Average consumition (route - urban): </h5><h5 className="normal">{avgConsumition}</h5>
         </Col>
       </Row>
       <Row>
@@ -52,10 +52,10 @@ export function DisponibilityInfo({dispo}:{dispo:Disponibility}):JSX.Element{
       </Row>
       <Row>
         <Col>
-          <label>Since: </label><span>{dispo.dateIn}</span>
+          <h5>Since: </h5><h5 className="normal">{dispo.dateIn}</h5>
         </Col>
         <Col>
-          <label>Until: </label><span>{dispo.dateOut}</span>
+          <h5>Until: </h5><h5 className="normal">{dispo.dateOut}</h5>
         </Col>
       </Row>
     </Container>

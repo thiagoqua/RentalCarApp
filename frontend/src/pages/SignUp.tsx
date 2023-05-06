@@ -3,6 +3,7 @@ import { borndateValidator, passwordsMatchValidator } from "../extra/validators"
 import { RegisterRequest } from "../models/RegisterRequest";
 import { UserService } from "../services/userService";
 import { useState } from "react";
+import { Container } from "react-bootstrap";
 
 interface Prop{
   handleFinished:() => void;
@@ -25,87 +26,88 @@ export function SignUp({handleFinished}:Prop):JSX.Element{
   
   return (
     <>
-      <h1>you are being signin</h1>
-      <form onSubmit={handleSubmit(handleData)}>
-        <div>
-          <label>First name</label>
-          <input type="text" {...register('firstname',{
-            required:true,
-            maxLength:20
-          })}/>
-          {errors.firstname?.type === "required" && <p>Completing this field is required</p>}
-          {errors.firstname?.type === "maxLength" && <p>Este campo debe tener como máximo 20 caracteres</p>}
-        </div>
-        <div>
-          <label>Last name</label>
-          <input type="text" {...register('lastname',{
-            required:true,
-            maxLength:20
-          })}/>
-          {errors.lastname?.type === "required" && <p>Completing this field is required</p>}
-          {errors.lastname?.type === "maxLength" && <p>Este campo debe tener como máximo 20 caracteres</p>}
-        </div>
-        <div>
-          <label>Nationality</label>
-          <input type="text" {...register('nationality',{
-            required:true,
-            maxLength:20
-          })}/>
-          {errors.nationality?.type === "required" && <p>Completing this field is required</p>}
-          {errors.nationality?.type === "maxLength" && <p>Este campo debe tener como máximo 20 caracteres</p>}
-        </div>
-        <div>
-          <label>ID (DNI for argentineans)</label>
-          <input type="text" {...register('identifier',{
-            required:true,
-            minLength:5,
-            maxLength:25,
-            pattern: /^[0-9]+$/
-          })}
-          />
-          {errors.identifier?.type === "pattern" && <p>Please insert a number</p>}
-          {errors.identifier?.type === "required" && <p>Completing this field is required</p>}
-          {errors.identifier?.type === "minLength" && <p>This field must have at least 5 characters</p>}
-          {errors.identifier?.type === "maxLength" && <p>This field must have 20 characters as max</p>}
-        </div>
-        <div>
-          <label>Born date</label>
-          <input type="date" {...register('borndate',{
-            required:true,
-            validate:borndateValidator
-          })}/>
-          {errors.borndate?.type === "required" && <p>Completing this field is required</p>}
-          {errors.borndate && <p>You have to be 18 or more to sign up</p>}
-        </div>
-        <div>
-          <label>Email</label>
-          <input type="text" {...register('email',{
-            required:true,
-            pattern:/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-          })}/>
-          {emailInUse && <p style={{color:'red'}}>ESTE EMAIL YA PERTENECE A UNA CUENTA REGISTRADA</p>}
-          {errors.email?.type === "required" && <p>Completing this field is required</p>}
-          {errors.email?.type === "pattern" && <p>Insert a valid email</p>}
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" {...register('password',{
-            required:true
-          })}/>
-          {errors.password?.type === "required" && <p>Completing this field is required</p>}
-          {errors.repassword && <p>The passwords don't match</p>}
-        </div>
-        <div>
-          <label>Repeat password</label>
-          <input type="password" {...register('repassword',{
-            required:true,
-            validate: (val:string) => {return passwordsMatchValidator(val,watch('password'))}
-          })}/>
-          {errors.repassword?.type === "required" && <p>Completing this field is required</p>}
-          {errors.repassword && <p>The passwords don't match</p>}
-        </div>
-        <input type="submit" value="sign in"/>
-      </form>
+      <h1>Sign Up</h1>
+      <Container>
+        <form onSubmit={handleSubmit(handleData)}>
+          <div className="row">
+            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+              <input type="text" placeholder="First Name" className="input" {...register('firstname',{
+                required:true,
+                maxLength:20
+              })}/>
+              {errors.firstname?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
+              {errors.firstname?.type === "maxLength" && <h4 className="advice">Este campo debe tener como máximo 20 caracteres</h4>}
+            </div>
+            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+              <input type="text" placeholder="Last Name" {...register('lastname',{
+                required:true,
+                maxLength:20
+              })}/>
+              {errors.lastname?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
+              {errors.lastname?.type === "maxLength" && <h4 className="advice">Este campo debe tener como máximo 20 caracteres</h4>}
+            </div>
+            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+              <input type="text" placeholder="Nationality" {...register('nationality',{
+                required:true,
+                maxLength:20
+              })}/>
+              {errors.nationality?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
+              {errors.nationality?.type === "maxLength" && <h4 className="advice">Este campo debe tener como máximo 20 caracteres</h4>}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+              <input type="text" placeholder="ID (DNI for argentineans)" {...register('identifier',{
+                required:true,
+                minLength:5,
+                maxLength:25,
+                pattern: /^[0-9]+$/
+              })}
+              />
+              {errors.identifier?.type === "pattern" && <h4 className="advice">Please insert a number</h4>}
+              {errors.identifier?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
+              {errors.identifier?.type === "minLength" && <h4 className="advice">This field must have at least 5 characters</h4>}
+              {errors.identifier?.type === "maxLength" && <h4 className="advice">This field must have 20 characters as max</h4>}
+            </div>
+            <div className="col-lg-4 col-md-6 col-sm-12 not">
+              <label>Born date</label>
+              <input type="date" {...register('borndate',{
+                required:true,
+                validate:borndateValidator
+              })}/>
+              {errors.borndate?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
+              {errors.borndate && <h4 className="advice">You have to be 18 or more to sign up</h4>}
+            </div>
+            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+              <input type="text" placeholder="Email" {...register('email',{
+                required:true,
+                pattern:/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+              })}/>
+              {emailInUse && <h4 className="advice">ESTE EMAIL YA PERTENECE A UNA CUENTA REGISTRADA</h4>}
+              {errors.email?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
+              {errors.email?.type === "pattern" && <h4 className="advice">Insert a valid email</h4>}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-6 col-sm-12 inputdiv">
+              <input type="password" placeholder="Password" {...register('password',{
+                required:true
+              })}/>
+              {errors.password?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
+              {errors.repassword && <h4 className="advice">The passwords don't match</h4>}
+            </div>
+            <div className="col-lg-6 col-sm-12 inputdiv">
+              <input type="password" placeholder="Repeat Password" {...register('repassword',{
+                required:true,
+                validate: (val:string) => {return passwordsMatchValidator(val,watch('password'))}
+              })}/>
+              {errors.repassword?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
+              {errors.repassword && <h4 className="advice">The passwords don't match</h4>}
+            </div>
+          </div>
+          <input type="submit" value="Sign Up" className="animated-button-def"/>
+        </form>
+      </Container>
     </>
   )
 }

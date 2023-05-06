@@ -16,7 +16,7 @@ export function Auth():JSX.Element{
     <div>
       {authCompleted
         ? <Navigate to='/'/>
-        : <Authenticate title="access" handleFinished={handleLogIn}/>
+        : <Authenticate title="Access" handleFinished={handleLogIn}/>
       }
     </div>
   )
