@@ -1,4 +1,4 @@
-import { APIURL } from "../extra/constants";
+import { APIURL } from "../helpers/constants";
 import { Car } from "../models/Car";
 
 export class CarService{

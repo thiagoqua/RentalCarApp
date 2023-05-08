@@ -1,11 +1,10 @@
 import { About } from "../components/About";
 import { Navbar } from "../components/Navbar";
 import { RentVehicles } from "../components/RentVehicles/RentVehicles";
-import { CarGallery } from "../components/CarGallery";
 import './styles.css';
 import { Contact } from "../components/Contact";
 import welcome_photo from '../assets/welcome-photo.png'
-import { CarGallery2 } from "../components/CarGallery2";
+import { CarGallery } from '../components/CarGallery'
 
 export function Home(): JSX.Element {
   return (
@@ -31,7 +30,7 @@ export function Home(): JSX.Element {
           </div>
         </div>
       </div>
-      <CarGallery2 />
+      <CarGallery />
       <About />
       <RentVehicles />
       <Contact/>

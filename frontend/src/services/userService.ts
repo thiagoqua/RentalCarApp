@@ -1,4 +1,4 @@
-import { APIURL } from "../extra/constants";
+import { APIURL } from "../helpers/constants";
 import { AuthenticationRequest } from "../models/AuthenticationRequest";
 import { RegisterRequest } from "../models/RegisterRequest";
 import { User } from "../models/User";

@@ -1,5 +1,5 @@
 import { RegisterOptions, useForm } from "react-hook-form"
-import { borndateValidator, passwordsMatchValidator } from "../extra/validators";
+import { borndateValidator, passwordsMatchValidator } from "../helpers/validators";
 import { RegisterRequest } from "../models/RegisterRequest";
 import { UserService } from "../services/userService";
 import { useState } from "react";

@@ -41,7 +41,24 @@ div{
     overflow: scroll;
 }
 
-.item-list, .item-list-smaller{
+.car-list{
+    max-height: 40vh;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.micro-item{
+    width: 80%;
+    height: auto;
+
+}
+
+.micro-item-desc{
+    font-size: 1rem;
+}
+
+.item-list{
     display: flex;
     flex-direction: column;
     gap: 0.5em;
@@ -56,25 +73,17 @@ div{
     max-height: 40%;
 }
 
-.item-list-smaller{
-    max-height: 35vh;
-}
-
-.item-list span:hover,.item-list-smaller span:hover{
-    color:#ffe74c;
-}
-
 .item {
-    background-color: #e5e6fc;
     color:#2b2d42;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     padding: 5px 10px;
-    font-family: 'Open Sans', sans-serif;
     font-size: 100%;
     font-weight: 700;
     letter-spacing: 1px;
     border: none;
+    display: flex;
+    flex-direction: column;
 }
 
 .lead{
@@ -88,12 +97,8 @@ div{
 }
 
 .item-clicked{
-    color:#ef233c;
-    background-color: #ffe74c;
-}
-
-.item-declicked{
-    color:#2b2d42;
+    color:#edf2f4;
+    background-color: #2b2d42;
 }
 
 .sorting{
@@ -399,7 +404,7 @@ div{
 
     .vi-container{
         margin-top: 10%;
-        background-color: rebeccapurple;
+        
     }
 
     .vi-container div{

@@ -3,8 +3,8 @@ import { UserService } from "../services/userService";
 import { AuthenticationRequest } from "../models/AuthenticationRequest";
 import { User } from "../models/User";
 import { useState } from "react";
-import { comingFrom } from "../extra/constants";
-import { storeUserLogged } from "../extra/methods";
+import { comingFrom } from "../helpers/constants";
+import { storeUserLogged } from "../helpers/methods";
 
 interface Props{
   handleFinished:(user:User) => void;

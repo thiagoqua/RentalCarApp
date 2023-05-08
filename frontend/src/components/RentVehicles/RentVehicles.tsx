@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { SeletData } from "./SelectData";
 import { CarList } from "../CarList";
 import { Disponibility } from "../../models/Disponibility";
-import { storeDispo } from "../../extra/methods";
+import { storeDispo } from "../../helpers/methods";
 
 export function RentVehicles(): JSX.Element {
   const [vehiclesAvailable, setVehiclesAvailable] = useState<Car[]>([]); //vehicles available from the dates selected
@@ -110,12 +110,11 @@ export function RentVehicles(): JSX.Element {
               >
                 lower price
               </span>
-              <div className="item-list-smaller">
+              <div className="car-list">
                 <CarList
                   vehicles={vehiclesFiltered}
                   handle={handleCar}
-                  carId={carSelected?.id}
-                  passingIndex={false}
+                  carSelectedId={carSelected?.id}
                 />
               </div>
             </div>

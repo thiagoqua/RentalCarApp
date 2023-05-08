@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LogIn } from "../pages/LogIn";
 import { SignUp } from "../pages/SignUp";
 import { User } from "../models/User";
-import { comingFrom } from "../extra/constants";
+import { comingFrom } from "../helpers/constants";
 import './Components.css'
 
 interface Prop{

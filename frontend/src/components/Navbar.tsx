@@ -3,7 +3,7 @@ import "./Components.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserService } from "../services/userService";
-import { getUserLogged } from "../extra/methods";
+import { getUserLogged, removeObject } from "../helpers/methods";
 
 export function Navbar(): JSX.Element {
   const [userLogged,setUserLogged] = useState<User>();
@@ -22,6 +22,8 @@ export function Navbar(): JSX.Element {
         .then((valid:boolean) => {
           if(valid)
             setUserLogged(user)
+          else
+            removeObject('user');
         })
     }
   },[])

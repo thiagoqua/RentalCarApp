@@ -7,7 +7,7 @@ import { CarService } from "../services/carService";
 import { Link } from "react-router-dom";
 import { Authenticate } from "../components/Authenticate";
 import { ReservationInfo } from "../components/ReservationInfo";
-import { getUserLogged } from "../extra/methods";
+import { getUserLogged } from "../helpers/methods";
 
 export function MyRents():JSX.Element{
   const [reserves,setReserves] = useState<Disponibility[]>([]);

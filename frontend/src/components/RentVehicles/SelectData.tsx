@@ -1,5 +1,5 @@
 import { Col } from "react-bootstrap";
-import { CATEGORIES } from "../../extra/constants";
+import { CATEGORIES } from "../../helpers/constants";
 
 interface myProps {
   handleDates: (inDate:boolean) => void;

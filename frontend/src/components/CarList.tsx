@@ -3,24 +3,21 @@ import { Car } from "../models/Car";
 interface myProps {
   vehicles: Car[];
   handle: (idOrIndex: number) => void;
-  carId: number|undefined;
-  passingIndex:boolean;     //if pass the list's index or the id to the handle function
+  carSelectedId: number|undefined;
 }
 
-export function CarList({ vehicles, handle, passingIndex ,carId }: myProps): JSX.Element {
+export function CarList({ vehicles, handle, carSelectedId }: myProps): JSX.Element {
   return (
     <>
       {vehicles.map((car,index) => (
-        <span
+        <div
+          className={carSelectedId == car.id ? 'item item-clicked' : 'item'}
           key={car.id}
-          onClick={() => {
-            const idOrIndex = passingIndex ? index : car.id;
-            handle(idOrIndex);
-          }}
-          className={`item ${carId == car.id ? 'item-clicked' : 'item-decliked'}`}
+          onClick={() => handle(car.id)}
         >
-          {car.brand.toUpperCase()} {car.model.toUpperCase()}
-        </span>
+          <img src={car.imageURL} alt={`${car.brand}_${car.model}`} className="micro-item"/>
+          <span className="micro-item-desc">{`${car.brand} ${car.model}`}</span>
+        </div>
       ))}
     </>
   );
