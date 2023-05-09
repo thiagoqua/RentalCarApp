@@ -30,7 +30,7 @@ export function SignUp({handleFinished}:Prop):JSX.Element{
       <Container>
         <form onSubmit={handleSubmit(handleData)}>
           <div className="row">
-            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+            <div className="col-lg-4 col-md-6 col-sm-12 signup-input">
               <input type="text" placeholder="First Name" className="input" {...register('firstname',{
                 required:true,
                 maxLength:20
@@ -38,7 +38,7 @@ export function SignUp({handleFinished}:Prop):JSX.Element{
               {errors.firstname?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
               {errors.firstname?.type === "maxLength" && <h4 className="advice">Este campo debe tener como máximo 20 caracteres</h4>}
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+            <div className="col-lg-4 col-md-6 col-sm-12 signup-input">
               <input type="text" placeholder="Last Name" {...register('lastname',{
                 required:true,
                 maxLength:20
@@ -46,7 +46,7 @@ export function SignUp({handleFinished}:Prop):JSX.Element{
               {errors.lastname?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
               {errors.lastname?.type === "maxLength" && <h4 className="advice">Este campo debe tener como máximo 20 caracteres</h4>}
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+            <div className="col-lg-4 col-md-6 col-sm-12 signup-input">
               <input type="text" placeholder="Nationality" {...register('nationality',{
                 required:true,
                 maxLength:20
@@ -56,7 +56,7 @@ export function SignUp({handleFinished}:Prop):JSX.Element{
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+            <div className="col-lg-4 col-md-6 col-sm-12 signup-input">
               <input type="text" placeholder="ID (DNI for argentineans)" {...register('identifier',{
                 required:true,
                 minLength:5,
@@ -78,7 +78,7 @@ export function SignUp({handleFinished}:Prop):JSX.Element{
               {errors.borndate?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
               {errors.borndate && <h4 className="advice">You have to be 18 or more to sign up</h4>}
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12 inputdiv">
+            <div className="col-lg-4 col-md-6 col-sm-12 signup-input">
               <input type="text" placeholder="Email" {...register('email',{
                 required:true,
                 pattern:/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -89,14 +89,14 @@ export function SignUp({handleFinished}:Prop):JSX.Element{
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-6 col-sm-12 inputdiv">
+            <div className="col-lg-6 col-sm-12 signup-input">
               <input type="password" placeholder="Password" {...register('password',{
                 required:true
               })}/>
               {errors.password?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
               {errors.repassword && <h4 className="advice">The passwords don't match</h4>}
             </div>
-            <div className="col-lg-6 col-sm-12 inputdiv">
+            <div className="col-lg-6 col-sm-12 signup-input">
               <input type="password" placeholder="Repeat Password" {...register('repassword',{
                 required:true,
                 validate: (val:string) => {return passwordsMatchValidator(val,watch('password'))}

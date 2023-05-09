@@ -7,11 +7,31 @@ div{
 }
 
 .navbar{
-    width: 98%;
-    margin-left:1%;
-    margin-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-links{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    gap:2rem;
     height: max-content;
     font-size: 120%;
+}
+
+.navbar a{
+    margin-top:0;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:4rem;
 }
 
 .auth-container{
@@ -20,13 +40,6 @@ div{
     height: 100vh;
 }
 
-.user-info{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap:2rem;
-}
 
 .gallery{
     height: fit-content;
@@ -43,6 +56,7 @@ div{
 
 .car-list{
     max-height: 40vh;
+    width: fit-content;
     overflow-y: scroll;
     display: grid;
     grid-template-columns: auto auto;
@@ -168,9 +182,12 @@ div{
     width:50%;
 }
 
+.ros-photo{
+    width: 100%;
+}
+
 .porta-photo{
     width: 100%;
-    height: 0;
     padding-bottom: 56.25%;
     position: relative;
 }
@@ -185,23 +202,22 @@ div{
 }
 
 .vi-container{
-    display:flex;
-    flex-wrap: wrap;
-    height: 100%;
-    justify-content: space-evenly;
-}
-
-.vi-container{
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
 }
 
-.vi-container div{
-    text-align: center;
+.vi-container-item{
+    display:flex;
+    flex-direction: column;
+    margin:0;
 }
 
-.c-info{
-    text-align: center;
+.attr{
+    color:#ef233c;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .loader {
@@ -226,10 +242,12 @@ div{
 .not{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 80%;
 }
 
 .not input{
-    height: 5.5rem;
+    width: 80%;
 }
 
 .car-advice{
@@ -302,7 +320,7 @@ div{
 
   .accent{
     color:#ef233c;
-  }
+}
 
   .disabled{
     color: #989a9e;
@@ -345,7 +363,7 @@ div{
   
   .car-brand{
     font-size: 300%;
-    font-weight: 600;
+    font-weight: 800;
     color:#ef233c;
     margin-right: 5%;
   }
@@ -390,11 +408,25 @@ div{
 
 /* equivale al sm de bootstrap */
 @media (max-width:540px){
-    
+    .next-car-button{
+        margin-top:5%;
+        width: 50%;
+    }
 
-    .navbar div{
-        width: 100%;
-        margin-right:0px;
+    .navbar{
+        flex-direction: column;
+    }
+
+    .navbar-links{
+        justify-content: space-evenly;
+    }
+
+    .user-info{
+        gap:0rem;
+    }
+
+    .user-info button{
+        width:max-content;
     }
     
     .item-list{

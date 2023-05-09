@@ -31,7 +31,7 @@ export function ReservationInfo({reservation,carReserved,onCancel}:Props):JSX.El
   }
 
   return (
-    <div className="rents-item" key={reservation.id}>
+    <div className="col-lg-4 col-md-6 col-sm-12 rents-item" key={reservation.id}>
       {!cancel
         ? 
           <>

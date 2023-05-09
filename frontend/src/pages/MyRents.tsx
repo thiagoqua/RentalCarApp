@@ -17,7 +17,7 @@ export function MyRents():JSX.Element{
   const [enableAnimation,setEnableAnimation] = useState<boolean>(false);
   const dispoService:DisponibilityService = new DisponibilityService();
   const carService:CarService = new CarService();
-  const className:string = enableAnimation ? "loader" : "rents-list";
+  const className:string = `row ${enableAnimation ? 'loader' : 'rents-list'}`;
 
   const onLoggedIn = (user:User) => {
     setUserLogged(user);
@@ -79,12 +79,12 @@ export function MyRents():JSX.Element{
         <div className="flexdiv">
           <h1>{userLogged?.firstname}</h1><h1 className="normal">, your rents are</h1>
         </div>
-          <Link to='/'>
-            <button className="animated-button-def">go to home page</button>
-          </Link>
+        <Link to='/'>
+          <button className="animated-button-def">go to home page</button>
+        </Link>
         <section>
           <div>
-            <h6>Sorted by rent date</h6>
+            <h5>Sorted by rent date</h5>
             <span className={sorted ? 'sorting-clicked' : 'sorting'}
                   onClick={() => handleSorting(true)}
             >

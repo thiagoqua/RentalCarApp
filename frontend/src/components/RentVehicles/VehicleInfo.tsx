@@ -1,31 +1,29 @@
-import { Link } from "react-router-dom";
 import { Car } from "../../models/Car";
 import "../Components.css";
-import { Col } from "react-bootstrap";
 
 export function VehicleInfo({vehicle}:{vehicle: Car|undefined;}): JSX.Element {  
   return (
     <div className="vi-container">
-      <Col lg={12}>
-        <h5>Year</h5>
+      <div className="vi-container-item">
+        <span className="attr">Year</span>
         <span>{vehicle ? vehicle.year : "-"}</span>
-      </Col>
-      <Col lg={12}>
-        <h5>Price p/day</h5>
+      </div>
+      <div className="vi-container-item">
+        <span className="attr">Price p/day</span>
         <span>{vehicle ? `USD $ ${vehicle.pricePerDay}` : "-"}</span>
-      </Col>
-      <Col lg={12}>
-        <h5>Doors</h5>
+      </div>
+      <div className="vi-container-item">
+        <span className="attr">Doors</span>
         <span>{vehicle ? vehicle.doors : "-"}</span>
-      </Col>
-      <Col lg={12}>
-        <h5>Transmission</h5>
+      </div>
+      <div className="vi-container-item">
+        <span className="attr">Transmission</span>
         <span>{vehicle ? vehicle.transmission : "-"}</span>
-      </Col>
-      <Col lg={12}>
-        <h5>Fuel type</h5>
+      </div>
+      <div className="vi-container-item">
+        <span className="attr">Fuel type</span>
         <span>{vehicle ? vehicle.fuelType : "-"}</span>
-      </Col>
+      </div>
     </div>
   );
 }

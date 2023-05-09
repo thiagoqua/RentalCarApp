@@ -20,7 +20,7 @@ export function About(): JSX.Element {
               <img
                 src="https://cdn.pixabay.com/photo/2021/01/04/19/18/city-5888619_1280.png"
                 alt="Rosario on Wheels office"
-                className="img-fluid"
+                className="ros-photo"
               />
             </Col>
             <Col lg={6}>

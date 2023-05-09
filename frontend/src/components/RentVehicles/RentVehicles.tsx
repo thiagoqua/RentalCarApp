@@ -83,17 +83,17 @@ export function RentVehicles(): JSX.Element {
   return (
     <div id="rent">
       <h1 className="head-title">Rent!</h1>
-      <Container fluid>
-        <Row>
-          <Col lg={3}>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-2">
             <SeletData
               handleDates={handleDates}
               handleCategory={handleCategory}
               inDate={inDate}
               datesCompleted={datesCompleted}
             />
-          </Col>
-          <Col lg={2}>
+          </div>
+          <div className="col-lg-3">
             <div className="rv-select-car">
               <h5>Select Car</h5>
               <h6>sort by </h6>
@@ -118,31 +118,28 @@ export function RentVehicles(): JSX.Element {
                 />
               </div>
             </div>
-          </Col>
-          <Col lg={5}>
-            {carSelected ? 
+          </div>
+          <div className="col-lg-5">
+            {carSelected &&
             <>
               <div className="porta-photo">
                 <img src={carSelected?.imageURL}/>
               </div>
               <Link to="/reserve">
-              <button className="animated-button-1" onClick={handleRent}>rent this car
-                <div className="icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
-                </div>
-              </button>
+                <button className="animated-button-1" onClick={handleRent}>rent this car
+                  <div className="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
+                  </div>
+                </button>
               </Link>
             </>
-            :
-            <>
-            </>
             }
-          </Col>
-          <Col lg={2} md={12}>
+          </div>
+          <div className="col-lg-2 col-md-12">
             <VehicleInfo vehicle={carSelected} />
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

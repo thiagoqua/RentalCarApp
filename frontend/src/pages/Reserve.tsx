@@ -4,7 +4,7 @@ import { Authenticate } from "../components/Authenticate";
 import { User } from "../models/User";
 import { DisponibilityInfo } from "../components/DisponibilityInfo";
 import { DisponibilityService } from "../services/disponibilityService";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { NotFoundPage } from "./NotFoundPage";
 import { getDispo, getUserLogged, removeObject } from "../helpers/methods";
 
@@ -73,8 +73,13 @@ export function Reserve(): JSX.Element {
         <>
           <h1>Reserved succesfully!</h1>
           <p>
-            We will wait for you on the <b>{dateHour![0]}</b> before the <b>{dateHour![1]}</b>{" "}
-            in our facility to proceed with the payment.
+            We will wait for you on the <b>{dateHour![0]}</b> before the{" "}
+            <b>{dateHour![1].split(":")[0]}</b> o'clock in our facility to
+            proceed with the payment and the retirement of the car.
+          </p>
+          <p style={{ color: "#ef233c" }}>
+            If you will not retire the car before the <b>{dateHour![0]}</b> at
+            12:00, your reservation will be <b>automatically deleted</b>.
           </p>
           <h5 className="normal">we will redirect you to the home page</h5>
           <Link to="/">
