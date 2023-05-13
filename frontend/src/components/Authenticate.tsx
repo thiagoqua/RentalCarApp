@@ -12,11 +12,12 @@ interface Prop{
 
 export function Authenticate({handleFinished,title}:Prop):JSX.Element{
   //true if user wants to login, false if user wants to sign in
-  const [wantsToLogin,setWantsToLogin] = useState<boolean>();  
-  const [signUpCompleted,setSignUpCompleted] = useState<boolean>(false);  
+  const [login,setLogin] = useState<boolean>();  
+  //true when the user complete the sign up
+  const [completed,setCompleted] = useState<boolean>(false);  
 
-  const onSignUpCompleted = () => {
-    setSignUpCompleted(true);
+  const oncompleted = () => {
+    setCompleted(true);
   }
 
   const onLogInCompleted = (user:User) => {
@@ -25,24 +26,24 @@ export function Authenticate({handleFinished,title}:Prop):JSX.Element{
 
   return (
     <div className="auth-container">
-      {!signUpCompleted ?
+      {!completed ?
         <>
-          <h1>{!wantsToLogin && title}</h1>
-            {wantsToLogin == undefined 
+          <h1>{!login && title}</h1>
+            {login == undefined 
             ? 
             <div>
-              <button onClick={() => setWantsToLogin(true)}
+              <button onClick={() => setLogin(true)}
                       className="animated-button-def">
                 Log In
               </button>
-              <button onClick={() => setWantsToLogin(false)}
+              <button onClick={() => setLogin(false)}
                       className="animated-button-def">
                 Sign Up
               </button>
             </div>
-            : wantsToLogin 
+            : login 
             ? <LogIn handleFinished={onLogInCompleted} whoCallsMe={comingFrom.USER}/> 
-            : <SignUp handleFinished={onSignUpCompleted}/>}
+            : <SignUp handleFinished={oncompleted}/>}
         </>
         : <LogIn handleFinished={onLogInCompleted} whoCallsMe={comingFrom.SIGNUP}/>
       }

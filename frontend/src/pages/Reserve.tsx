@@ -6,7 +6,7 @@ import { DisponibilityInfo } from "../components/DisponibilityInfo";
 import { DisponibilityService } from "../services/disponibilityService";
 import { Link } from "react-router-dom";
 import { NotFoundPage } from "./NotFoundPage";
-import { getDispo, getUserLogged, removeObject } from "../helpers/methods";
+import { savedDispo, savedUser, removeSomething } from "../helpers/localStorageAccesses";
 
 export function Reserve(): JSX.Element {
   const [userLogged, setUserLogged] = useState<User>();
@@ -24,23 +24,23 @@ export function Reserve(): JSX.Element {
   };
 
   const onLoggedIn = (user: User) => {
-    const dispo: Disponibility = getDispo()!;
+    const dispo: Disponibility = savedDispo()!;
     dispo.userId = user.id;
     setUserLogged(user);
     setDispoInCuestion(dispo);
-    removeObject("dispo");
+    removeSomething("dispo");
   };
 
   useEffect(() => {
-    const user: User | null = getUserLogged();
-    const dispo: Disponibility | null = getDispo();
+    const user: User | null = savedUser();
+    const dispo: Disponibility | null = savedDispo();
     if (dispo) {
       //if null becouse trying to access via url
       setDispoInCuestion(dispo);
       if (user) {
         dispo.userId = user.id;
         setUserLogged(user);
-        removeObject("dispo");
+        removeSomething("dispo");
       }
     }
   }, []);

@@ -1,72 +1,31 @@
 import { useState } from "react";
 import { Car } from "../../models/Car";
-import { CarService } from "../../services/carService";
-import { Container, Row, Col } from "react-bootstrap";
 import { VehicleInfo } from "./VehicleInfo";
 import { Link } from "react-router-dom";
 import { SeletData } from "./SelectData";
 import { CarList } from "../CarList";
 import { Disponibility } from "../../models/Disponibility";
-import { storeDispo } from "../../helpers/methods";
+import { storeDispo } from "../../helpers/localStorageAccesses";
+import { useCars } from "../../hooks/useCars";
 
 export function RentVehicles(): JSX.Element {
-  const [vehiclesAvailable, setVehiclesAvailable] = useState<Car[]>([]); //vehicles available from the dates selected
-  const [vehiclesFiltered, setVehiclesFiltered] = useState<Car[]>([]); //the vehicles available but with filters
-  const [datesCompleted, setDatesCompleted] = useState(false);
+  const [show,setShow] = useState<boolean>(false);
   const [carSelected, setCarSelected] = useState<Car>();
-  const [inDate, setInDate] = useState<Date>();
-  const [sorted, setSorted] = useState<boolean>(true); //true if is sorted by higher price
-
-  const service: CarService = new CarService();
-
-  const handleDates = (isFirstDate: boolean) => {
-    //if the function is called by the first input type date
-    const dropInDate: any = document.getElementById("dropInDate");
-    if (isFirstDate) {
-      setInDate(dropInDate.valueAsDate);
-    } else {
-      const dropOffDate: any = document.getElementById("dropOffDate");
-
-      if (dropInDate.value && dropOffDate.value) {
-        setDatesCompleted(true);
-        service.getCarsDisponibility(dropInDate.value, dropOffDate.value)
-          .then((cars: Car[]) => {
-            setVehiclesAvailable(cars);
-            setVehiclesFiltered(cars);
-          });
-      }
-    }
-  };
+  const {vehicles,setAvailability} = useCars();
 
   const handleCar = (id: number) => {
-    const car: Car | undefined = vehiclesAvailable.find(
-      (vehicle) => vehicle.id == id
+    const car: Car | undefined = vehicles.find(
+      (vehicle:Car) => vehicle.id == id
     );
     setCarSelected(car);
   };
 
-  const handleCategory = (which: string) => {
-    const vehiclesByCat: Car[] = vehiclesAvailable.filter(
-      (car: Car) => car.category == which
-    );
-    setVehiclesFiltered(
-      vehiclesByCat.sort((a: Car, b: Car) => a.pricePerDay - b.pricePerDay)
-    );
-  };
-
-  const handleSorting = (higherSorting: boolean) => {
-    higherSorting
-      ? setVehiclesFiltered(
-          vehiclesFiltered.sort(
-            (a: Car, b: Car) => a.pricePerDay - b.pricePerDay
-          )
-        )
-      : setVehiclesFiltered(
-          vehiclesFiltered.sort(
-            (a: Car, b: Car) => b.pricePerDay - a.pricePerDay
-          )
-        );
-    setSorted(higherSorting);
+  const handleCars = (from:Date,to:Date,which?:string) => {
+    const lang:string = "sv-SE";
+    setAvailability(from.toLocaleDateString(lang),
+                    to.toLocaleDateString(lang),
+                    which);
+    setShow(true);
   };
 
   const handleRent = () => {
@@ -87,32 +46,15 @@ export function RentVehicles(): JSX.Element {
         <div className="row">
           <div className="col-lg-2">
             <SeletData
-              handleDates={handleDates}
-              handleCategory={handleCategory}
-              inDate={inDate}
-              datesCompleted={datesCompleted}
+              handleCars={handleCars}
             />
           </div>
           <div className="col-lg-3">
             <div className="rv-select-car">
               <h5>Select Car</h5>
-              <h6>sort by </h6>
-              <span
-                onClick={() => handleSorting(false)}
-                className={!sorted ? "sorting sorting-clicked" : "sorting"}
-              >
-                higher price
-              </span>
-              <span> - </span>
-              <span
-                onClick={() => handleSorting(true)}
-                className={sorted ? "sorting sorting-clicked" : "sorting"}
-              >
-                lower price
-              </span>
               <div className="car-list">
                 <CarList
-                  vehicles={vehiclesFiltered}
+                  vehicles={show && vehicles}
                   handle={handleCar}
                   carSelectedId={carSelected?.id}
                 />

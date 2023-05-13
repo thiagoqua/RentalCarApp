@@ -2,14 +2,16 @@ import { useState } from "react"
 import { Authenticate } from "../components/Authenticate"
 import { User } from "../models/User"
 import { Navigate } from "react-router-dom";
-import { storeUserLogged } from "../helpers/methods";
+import { storeUser } from "../helpers/localStorageAccesses";
+import { useUser } from "../hooks/useUser";
 
 export function Auth():JSX.Element{
+  const {login} = useUser();
   const [authCompleted,setAuthCompleted] = useState(false);
   
   const handleLogIn = (userLogged:User) => {
     setAuthCompleted(true);
-    storeUserLogged(userLogged);
+    login(userLogged);
   }
 
   return (

@@ -1,32 +1,13 @@
-import { User } from "../models/User";
 import "./Components.css";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { UserService } from "../services/userService";
-import { getUserLogged, removeObject } from "../helpers/methods";
+import { useUser } from "../hooks/useUser";
 
 export function Navbar(): JSX.Element {
-  const [userLogged,setUserLogged] = useState<User>();
-  const service:UserService = new UserService();
-  
-  const handleLogOut = () => {
-    localStorage.removeItem("user");
-    setUserLogged(undefined);
-  }
+  const {userLogged,logout} = useUser();
 
-  useEffect(() => {
-    const user:User|null = getUserLogged();
-    if(user){
-      //check for the validation of the token
-      service.checkTokenValidation(user)
-        .then((valid:boolean) => {
-          if(valid)
-            setUserLogged(user)
-          else
-            removeObject('user');
-        })
-    }
-  },[])
+  const handleLogOut = () => {
+    logout();
+  }
 
   return (
     <div className="navbar">

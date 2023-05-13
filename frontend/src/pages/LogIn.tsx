@@ -4,7 +4,8 @@ import { AuthenticationRequest } from "../models/AuthenticationRequest";
 import { User } from "../models/User";
 import { useState } from "react";
 import { comingFrom } from "../helpers/constants";
-import { storeUserLogged } from "../helpers/methods";
+import { storeUser } from "../helpers/localStorageAccesses";
+import { useUser } from "../hooks/useUser";
 
 interface Props{
   handleFinished:(user:User) => void;
@@ -12,9 +13,10 @@ interface Props{
 }
 
 export function LogIn({handleFinished,whoCallsMe}:Props):JSX.Element{
+  const {login} = useUser();
   const {register, formState:{ errors }, handleSubmit} = useForm();
   //user if the data is correct and the user is logged. null if there isnt a user with that email
-  const [userLogged,setUserLogged] = useState<boolean>();
+  const [loggedOk,setLoggedOk] = useState<boolean>();
   const [error,setError] = useState<string>();
   
   const handleData = (formData:any) => {
@@ -22,13 +24,13 @@ export function LogIn({handleFinished,whoCallsMe}:Props):JSX.Element{
     const authRequest:AuthenticationRequest = new AuthenticationRequest(formData.email,formData.password);
     service.logIn(authRequest).then((res:Response) => {
       if(!res.ok)
-        setUserLogged(false);
+        setLoggedOk(false);
       else
         res.json().then((user:User) => {
           handleFinished(user);
-          setUserLogged(true);
+          setLoggedOk(true);
           if(formData.remember)
-            storeUserLogged(user);
+            login(user);
         });
     },(reason:string) => setError(reason));
   }
@@ -60,7 +62,7 @@ export function LogIn({handleFinished,whoCallsMe}:Props):JSX.Element{
             </label>  
           </div>
         </div>
-        {userLogged == false && <h5>invalid credentials</h5>}
+        {loggedOk == false && <h5>invalid credentials</h5>}
         <input type="submit" value="log in" className="animated-button-def"/>
         {error && <h4 className="advice">Se produjo un error al enviar la petición al servidor</h4>}
       </form>

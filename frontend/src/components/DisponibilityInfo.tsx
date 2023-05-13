@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react";
 import { Disponibility } from "../models/Disponibility";
-import { CarService } from "../services/carService";
-import { Car } from "../models/Car";
+import { useCar } from "../hooks/useCar";
 
 export function DisponibilityInfo({dispo}:{dispo:Disponibility}):JSX.Element{
-  const [car,setCar] = useState<Car>();
-  const service:CarService = new CarService();
+  const {car} = useCar({id:dispo.carId});
   const avgConsumition:number = (car?.routeConsumption! + car?.urbanConsumption!) / 2;
-
-  useEffect(() => {
-    service.getCarById(dispo.carId).then((vehicle:Car) => setCar(vehicle));
-  }
-  ,[])
 
   return (
     <>

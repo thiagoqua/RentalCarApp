@@ -18,7 +18,6 @@ But if you want to run the backend too or the hole project in Docker, the only t
 2. Build the Docker container: `docker build -t database:test .`
 3. Run the container: `docker run --name db -p 3307:3306 -d database:test`
 > To stop/turn off the container: `docker stop db`
-<br/>
 
 > To re-run/restart the container: `docker restart db`
 
@@ -26,7 +25,7 @@ But if you want to run the backend too or the hole project in Docker, the only t
 You can run in Docker:
 - Only the database (mandatory).
 - The backend + the database.
-- (**TODO**) The hole project.
+- The hole project.
 #### Running the backend
 1. Create the network where the database and Spring will comunicate: `docker network create spring-mysql`
 2. Run the steps 1 and 2 from the database running explanation

@@ -22,11 +22,21 @@ export function Contact():JSX.Element{
         </div>
         <div className="col-lg-4 col-md-6 col-sm-12 c-info">
           <h3>Social media</h3>
-          <span>https://instagram.com/rosario-on-wheels</span>
+          <div className='links'>
+            <a href='https://instagram.com/rosario-on-wheels'>
+              <img  src='https://cdn-icons-png.flaticon.com/128/174/174855.png' alt='ig-logo' 
+                    className='social-logo'/>
+            </a>
+            <a href='https://facebook.com/rosario-on-wheels'>
+              <img  src='https://cdn-icons-png.flaticon.com/128/174/174848.png' alt='fb-logo' 
+                    className='social-logo'/>
+            </a>
+            <a href='https://linkedin.com/rosario-on-wheels'>
+              <img  src='https://cdn-icons-png.flaticon.com/128/3536/3536505.png' alt='ln-logo' 
+                    className='social-logo'/>
+            </a>
+          </div>
           <br/>
-          <span>https://facebook.com/rosario-on-wheels</span>
-          <br/>
-          <span>https://linkedin.com/rosario-on-wheels</span>
         </div>
       </div>
     </div>

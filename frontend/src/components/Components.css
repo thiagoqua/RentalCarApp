@@ -55,7 +55,7 @@ div{
 }
 
 .car-list{
-    max-height: 40vh;
+    max-height: 60vh;
     width: fit-content;
     overflow-y: scroll;
     display: grid;
@@ -223,7 +223,7 @@ div{
 .loader {
     width:30vh;
     height:30vh;
-    margin-left:42%;
+    margin-left:43%;
     border-radius:50%;
     background:conic-gradient(#0000 10%,#ef233c);
     mask:radial-gradient(farthest-side,#0000 calc(100% - 16px),#000 0);
@@ -373,6 +373,15 @@ div{
     font-weight: 500;
     color:#2b2d42;
   }
+
+  .links{
+    display: flex;
+    justify-content: center;
+  }
+
+  .links img {
+    width: 55%;
+  }
   
   
   /* Style the checkmark/indicator */
@@ -406,19 +415,23 @@ div{
     100% {transform:perspective(150px) rotateX(-180deg) rotateY(-180deg) rotateX(-180deg);filter:grayscale(0.8)}
   }
 
+@media (max-width:960px){
+    .navbar{
+        flex-direction: column;
+        align-items:start;
+    }
+    
+    .navbar-links{
+        margin-left: 0%;
+        gap:0.4rem;
+    }
+}
+
 /* equivale al sm de bootstrap */
 @media (max-width:540px){
     .next-car-button{
         margin-top:5%;
         width: 50%;
-    }
-
-    .navbar{
-        flex-direction: column;
-    }
-
-    .navbar-links{
-        justify-content: space-evenly;
     }
 
     .user-info{

@@ -1,0 +1,14 @@
+version:'3.8'
+
+services:
+  db:
+    image: mysql:8.0.29
+    environment:
+      MYSQL_ROOT_PASSWORD=root
+      MYSQL_DATABASE=db_rentalcar
+      MYSQL_USER=springuser
+      MYSQL_PASSWORD=springtesting2202
+  backend:
+  frontend:
+
+volumes:

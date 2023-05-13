@@ -1,7 +1,7 @@
 import { Car } from "../models/Car";
 
 interface myProps {
-  vehicles: Car[];
+  vehicles?: Car[];
   handle: (idOrIndex: number) => void;
   carSelectedId: number|undefined;
 }
@@ -9,7 +9,8 @@ interface myProps {
 export function CarList({ vehicles, handle, carSelectedId }: myProps): JSX.Element {
   return (
     <>
-      {vehicles.map((car,index) => (
+      {vehicles && 
+        vehicles.map((car,index) => (
         <div
           className={carSelectedId == car.id ? 'item item-clicked' : 'item'}
           key={car.id}

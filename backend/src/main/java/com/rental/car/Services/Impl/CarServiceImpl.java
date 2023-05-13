@@ -2,12 +2,10 @@ package com.rental.car.Services.Impl;
 
 import com.rental.car.Models.Car;
 import com.rental.car.Models.CarCategory;
-import com.rental.car.Models.Disponibility;
 import com.rental.car.Repositories.CarRepository;
 import com.rental.car.Repositories.DisponibilityRepository;
 import com.rental.car.Services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
