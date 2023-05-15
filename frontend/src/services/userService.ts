@@ -5,12 +5,12 @@ import { User } from "../models/User";
 
 export class UserService{
 
-  public signUp(user:RegisterRequest):Promise<{id:number,token:string}>{          //its any becouse it can return an error
+  public signUp(user:RegisterRequest):Promise<Response>{          //its any becouse it can return an error
     return fetch(`${APIURL}/user/register`,{
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(user)
-    }).then(res => res.json());
+    });
   }
 
   public logIn(authRequest:AuthenticationRequest):Promise<Response>{

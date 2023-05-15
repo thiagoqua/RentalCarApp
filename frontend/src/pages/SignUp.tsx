@@ -16,8 +16,8 @@ export function SignUp({handleFinished}:Prop):JSX.Element{
   const handleData = (data:Object) => {
     const service:UserService = new UserService();
     const user:RegisterRequest = data as RegisterRequest;
-    service.signUp(user).then((response:{id:number,token:string}) => {
-      if(response.id == null)
+    service.signUp(user).then((response) => {
+      if(response.status == 409)
         setEmailInUse(true);
       else 
         handleFinished();
@@ -83,7 +83,7 @@ export function SignUp({handleFinished}:Prop):JSX.Element{
                 required:true,
                 pattern:/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
               })}/>
-              {emailInUse && <h4 className="advice">ESTE EMAIL YA PERTENECE A UNA CUENTA REGISTRADA</h4>}
+              {emailInUse && <h4 className="advice">Este email ya pertenece a una cuenta registrada</h4>}
               {errors.email?.type === "required" && <h4 className="advice">Completing this field is required</h4>}
               {errors.email?.type === "pattern" && <h4 className="advice">Insert a valid email</h4>}
             </div>

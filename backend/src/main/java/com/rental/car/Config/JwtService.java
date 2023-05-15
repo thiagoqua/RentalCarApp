@@ -63,13 +63,11 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, Long userId){
-        boolean valid;
+        boolean valid = false;
         try{
             isTokenValid(token,userService.loadById(userId));
             valid = true;
-        } catch(ExpiredJwtException eje){
-            valid = false;
-        }
+        } catch(Exception ignored){}
         return valid;
     }
 

@@ -161,6 +161,13 @@ div{
     color: #ef233c;
 }
 
+.selection option{
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #2b2d42;
+    color:#edf2f4;
+    font-weight: 700;
+}
+
 .keep{
     display:flex;
     text-align: center;
@@ -418,17 +425,27 @@ div{
 @media (max-width:960px){
     .navbar{
         flex-direction: column;
-        align-items:start;
     }
     
     .navbar-links{
-        margin-left: 0%;
-        gap:0.4rem;
+        align-items: center;
+        justify-content: center;
+        gap:4rem;
     }
 }
 
 /* equivale al sm de bootstrap */
 @media (max-width:540px){
+    .navbar{
+        flex-direction: column;
+        align-items:center;
+    }
+    
+    .navbar-links{
+        margin-left: 0%;
+        gap:0.5rem;
+    }
+
     .next-car-button{
         margin-top:5%;
         width: 50%;

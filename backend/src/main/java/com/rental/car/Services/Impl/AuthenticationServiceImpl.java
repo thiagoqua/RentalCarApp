@@ -4,11 +4,14 @@ import com.rental.car.Config.JwtService;
 import com.rental.car.Models.Role;
 import com.rental.car.Models.User;
 import com.rental.car.Models.UserAuth.AuthenticationRequest;
-import com.rental.car.Models.UserAuth.AuthenticationResponse;
 import com.rental.car.Models.UserAuth.RegisterRequest;
+import com.rental.car.Models.UserDTO;
 import com.rental.car.Repositories.UserRepository;
 import com.rental.car.Services.AuthenticationService;
+import com.rental.car.Utils.UserDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,14 +30,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private JwtService jwtService;
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserDTOMapper mapper;
 
     @Override
-    public AuthenticationResponse register(RegisterRequest request) {
+    public ResponseEntity<UserDTO> register(RegisterRequest request) {
         if(repo.findByEmail(request.getEmail()).isPresent())
-            return AuthenticationResponse.builder()
-                    .id(null)
-                    .token(null)
-                    .build();
+            return ResponseEntity.status(HttpStatusCode.valueOf(409)).build();
+
         String token;
         User user = User.builder()
                 .firstname(request.getFirstname())
@@ -50,14 +53,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         repo.save(user);
         token = jwtService.generateToken(user);
 
-        return AuthenticationResponse.builder()
-                .token(token)
-                .id(user.getId())
-                .build();
+        return ResponseEntity.ok(mapper.apply(user,token));
     }
 
     @Override
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public ResponseEntity<UserDTO> authenticate(AuthenticationRequest request) {
         Optional<User> userCheck;
         User user;
         String token;
@@ -67,22 +67,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         );
         userCheck = repo.findByEmail(request.getEmail());
 
-        if(userCheck.isEmpty()){
-            System.out.println("dont exists");
-            return AuthenticationResponse.builder().id((long) -1).build();
-        }
+        if(userCheck.isEmpty())
+            return ResponseEntity.notFound().build();
 
         user = userCheck.get();
         token = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .id(user.getId())
-                .token(token)
-                .firstname(user.getFirstname())
-                .lastname(user.getLastname())
-                .email(user.getEmail())
-                .nationality(user.getNationality())
-                .identifier(user.getIdentifier())
-                .borndate(user.getBorndate().toString())
-                .build();
+        return ResponseEntity.ok(mapper.apply(user,token));
+    }
+
+    @Override
+    public ResponseEntity<Boolean> validate(String token, Long userId) {
+        return jwtService.isTokenValid(token,userId)
+                ? ResponseEntity.ok(true)
+                : ResponseEntity.ok(false);
     }
 }
