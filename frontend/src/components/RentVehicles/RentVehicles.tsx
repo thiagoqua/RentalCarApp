@@ -11,7 +11,7 @@ import { useCars } from "../../hooks/useCars";
 export function RentVehicles(): JSX.Element {
   const [show,setShow] = useState<boolean>(false);
   const [carSelected, setCarSelected] = useState<Car>();
-  const {vehicles,setAvailability} = useCars();
+  const {vehicles,setAvailability} = useCars({});
 
   const handleCar = (id: number) => {
     const car: Car | undefined = vehicles.find(

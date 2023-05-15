@@ -22,4 +22,5 @@ public class Disponibility {
     @Column(name = "dateout")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp dateOut;
+    private Boolean paid;
 }

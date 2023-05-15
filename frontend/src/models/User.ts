@@ -7,6 +7,7 @@ export class User{
   public nationality:string|undefined;
   public identifier:number|undefined;
   public borndate:string|undefined;
+  public role:string|undefined;
 
   constructor(
     firstname?:string,
@@ -16,7 +17,8 @@ export class User{
     borndate?:string,
     identifier?:number,
     id?:number,
-    token?:string
+    token?:string,
+    role?:string
   ){
     this.firstname = firstname;
     this.lastname = lastname;
@@ -26,5 +28,6 @@ export class User{
     this.borndate = borndate;
     this.id = id;
     this.token = token;
+    this.role = role;
   }
 }

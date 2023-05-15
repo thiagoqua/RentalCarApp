@@ -6,8 +6,14 @@ export function useCars():any{
   const [vehicles,setVehicles] = useState<Car[]>([]);
   const service:CarService = new CarService();
 
+  const handleIds = (carIds:number[]) => {
+    service.getCarsByIds(carIds).then((cars:Car[]) => setVehicles(cars))
+  }
+
   useEffect(() => {
-      service.getAllCars().then((cars: Car[]) => setVehicles(cars));
+    service.getAllCars().then((cars: Car[]) => {
+      setVehicles(cars);
+    });
   },[])
 
   const getByAvailability = (from:string,to:string,category?:string) => {
@@ -18,5 +24,5 @@ export function useCars():any{
       });
   }
 
-  return {vehicles,setAvailability:getByAvailability}
+  return {vehicles,setAvailability:getByAvailability,setVehiclesIds:handleIds}
 }

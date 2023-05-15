@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { User } from "../models/User";
 import { UserService } from "../services/userService";
 import { savedUser, removeSomething, storeUser } from "../helpers/localStorageAccesses";
+import { UserContext } from "../context/user";
 
 export function useUser():any{
-  const [userLogged,setUserLogged] = useState<User>();
+  const {userLogged,setUserLogged} = useContext(UserContext);
   const service:UserService = new UserService();
 
   useEffect(() => {
@@ -22,6 +23,7 @@ export function useUser():any{
   },[])
 
   const login = (user:User) => {
+    setUserLogged(user);
     storeUser(user);
   }
 

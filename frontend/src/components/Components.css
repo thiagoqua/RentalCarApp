@@ -27,10 +27,13 @@ div{
     margin-top:0;
 }
 
-.user-info{
+.user-info, .user-info-shorted{
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.user-info{
     gap:4rem;
 }
 
@@ -389,8 +392,7 @@ div{
   .links img {
     width: 55%;
   }
-  
-  
+    
   /* Style the checkmark/indicator */
   .checkbox-container .checkmark:after {
     left: 0.45em;

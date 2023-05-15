@@ -25,4 +25,16 @@ export class UserService{
     return fetch(`${APIURL}/user/validate?userid=${user.id}&token=${user.token}`)
             .then(res => res.json());
   }
+
+  public getAllById(requesting:User,ids:number[]):Promise<Response>{
+    return fetch(`${APIURL}/user/admin/idmulti?adminId=${requesting.id}`,
+    {
+      method: 'POST',
+      headers:new Headers({
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${requesting.token}`
+      }),
+      body: JSON.stringify(ids)
+    });
+  }
 }

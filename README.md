@@ -59,6 +59,3 @@ You can run in Docker:
 6. Inside the project root directory, go to the backend directory: `cd backend`
 7. Run the project: `./mvnw spring-boot:run`
 **This process will took a while becouse Maven have to install all the project's dependencies and then run it.**
----
-# TODO: 
-- (optional) create an admin user who can confirm the payment of the reserve

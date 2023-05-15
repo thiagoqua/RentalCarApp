@@ -18,7 +18,8 @@ public class UserDTOMapper implements BiFunction<User, String, UserDTO> {
                 user.getEmail(),
                 user.getNationality(),
                 user.getIdentifier(),
-                user.getBorndate().toString()
+                user.getBorndate().toString(),
+                user.getRole().name()
         );
     }
 }

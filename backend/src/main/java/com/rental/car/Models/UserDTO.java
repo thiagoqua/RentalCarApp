@@ -8,5 +8,6 @@ public record UserDTO(
         String email,
         String nationality,
         String identifier,
-        String borndate
+        String borndate,
+        String role
 ) {}

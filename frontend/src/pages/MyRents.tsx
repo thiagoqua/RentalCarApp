@@ -15,9 +15,10 @@ export function MyRents():JSX.Element{
   const [userLogged,setUserLogged] = useState<User>();
   const [sorted,setSorted] = useState<boolean>(true);
   const [enableAnimation,setEnableAnimation] = useState<boolean>(false);
+  const [cancel,setCancel] = useState<number>();
   const dispoService:DisponibilityService = new DisponibilityService();
   const carService:CarService = new CarService();
-  const className:string = `${enableAnimation ? 'loader' : 'rents-list'}`;
+  const className:string = `${enableAnimation ? 'loader' : cancel ? 'flexdiv-col' : 'rents-list'}`;
 
   const onLoggedIn = (user:User) => {
     setUserLogged(user);
@@ -37,9 +38,9 @@ export function MyRents():JSX.Element{
     );
   }
 
-  const deleteReservation = (id:number) => {
+  const deleteReservation = () => {
     setEnableAnimation(true);
-    dispoService.deleteById(id,userLogged!.token!);
+    dispoService.deleteById(cancel!,userLogged!.token!);
     //i wait 2 second to the next petiton so the previous petition make effect
     setTimeout(() => {
       dispoService.getByUser(userLogged!.id!,userLogged!.token!)
@@ -49,6 +50,7 @@ export function MyRents():JSX.Element{
     },2000)
     //show the animation 3 seconds to simulate the petition
     setTimeout(() => setEnableAnimation(false),3000)
+    setCancel(undefined);
   }
 
   useEffect(() => {
@@ -71,6 +73,15 @@ export function MyRents():JSX.Element{
       setCarsReserved(cars)
     );
   },[reserves[0]])
+
+  const cancelCancel = () => {
+    setCancel(undefined);
+  }
+
+  const canCancel = (dateIn:Date) => {
+    const today:Date = new Date();
+    return dateIn > today;
+  }
 
   return (
     <div>
@@ -100,12 +111,33 @@ export function MyRents():JSX.Element{
         </section>
         <div className={className}>
           {!enableAnimation && 
-            reserves.map((dispo:Disponibility,index:number) => (
-              <ReservationInfo  reservation={dispo} 
-                                carReserved={carsReserved[index]} 
-                                onCancel={deleteReservation}
-                                key={dispo.id}/>
-            ))
+            <>
+              {!cancel 
+              ?
+                reserves.map((dispo:Disponibility,index:number) => (
+                  <>
+                    <div className="col-lg-4 col-md-6 col-sm-12 rents-item" key={dispo.id}>
+                      <ReservationInfo  reservation={dispo} 
+                                        carReserved={carsReserved[index]}/>
+                      {canCancel(new Date(dispo.dateIn))
+                        ? <button onClick={() => setCancel(dispo.id)} className="animated-button-def">
+                            cancel reservation
+                          </button>
+                        : <h4 className="disabled">outdated</h4>
+                      }
+                    </div>
+                  </>
+                ))
+              :
+                <>
+                  <h3>Are you sure to delete this reservation?</h3>
+                  <div>
+                    <button onClick={deleteReservation} className="animated-button-def">yes</button>
+                    <button onClick={cancelCancel} className="animated-button-def">no</button>
+                  </div>
+                </>
+            }
+            </>
           }
         </div>
       </>

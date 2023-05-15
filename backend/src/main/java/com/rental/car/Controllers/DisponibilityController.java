@@ -21,7 +21,9 @@ public class DisponibilityController {
     private DisponibilityService dispoService;
 
     @GetMapping("/cars")
-    private List<Car> getCarsByDisponibility(@RequestParam Map<String,String> params){return carService.getCarsByDisponibility(params.get("in"),params.get("out"));}
+    private List<Car> getCarsByDisponibility(@RequestParam Map<String,String> params){
+        return carService.getCarsByDisponibility(params.get("in"),params.get("out"));
+    }
 
     @PostMapping("/reserve")
     private void reserveCar(@RequestBody Disponibility toReserve){
@@ -34,12 +36,18 @@ public class DisponibilityController {
     }
 
     @GetMapping("/delete")
-    private void delete(@RequestParam Long id){
+    private ResponseEntity<Void> delete(@RequestParam Long id){
         dispoService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/test")
-    private ResponseEntity<String> a(@RequestBody String saying){
-        return ResponseEntity.ok(saying);
+    @GetMapping("/admin/all")
+    private ResponseEntity<List<Disponibility>> getAll(@RequestParam Long adminId){
+        return dispoService.getAll(adminId);
+    }
+
+    @GetMapping("/admin/paid")
+    private ResponseEntity<Void> setPaid(@RequestParam Long adminId,Long dispoId){
+        return dispoService.setPaid(adminId,dispoId);
     }
 }

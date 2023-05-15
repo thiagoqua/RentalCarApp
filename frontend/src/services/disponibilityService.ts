@@ -1,5 +1,6 @@
 import { APIURL } from "../helpers/constants";
 import { Disponibility } from "../models/Disponibility";
+import { User } from "../models/User";
 
 export class DisponibilityService{
 
@@ -27,12 +28,32 @@ export class DisponibilityService{
     }).then((res:Response) => res.json());
   }
 
-  public deleteById(id:number,userToken:string){
+  public deleteById(id:number,userToken:string):Promise<Response>{
     return fetch(`${APIURL}/disponibility/delete?id=${id}`,
     {
       headers:new Headers({
         'Content-Type':'application/json',
         'Authorization':`Bearer ${userToken}`
+      })
+    });
+  }
+
+  public getAll(userId:number,userToken:string):Promise<Response>{
+    return fetch(`${APIURL}/disponibility/admin/all?adminId=${userId}`,
+    {
+      headers:new Headers({
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${userToken}`
+      })
+    });
+  }
+
+  public setPaid(user:User,id:number):Promise<Response>{
+    return fetch(`${APIURL}/disponibility/admin/paid?adminId=${user.id!}&dispoId=${id}`,
+    {
+      headers:new Headers({
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${user.token}`
       })
     });
   }
