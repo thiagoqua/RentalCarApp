@@ -3,10 +3,11 @@ import { CATEGORIES } from "../../helpers/constants";
 import { useDates } from "../../hooks/useDates";
 
 interface myProps {
-  handleCars: (from:any,to:any,category?:string) => void;
+  handleCars: (from:any,to:any) => void;
+  handleFilter: (category:string) => void;
 }
 
-export function SeletData({ handleCars }:myProps): JSX.Element {
+export function SeletData({handleCars,handleFilter}:myProps): JSX.Element {
   const {setFirstDate,setSecondDate,dateIn,dateOut,datesCompleted,reset} = useDates();
 
   const handleDates = (isFirstDate:boolean) => {
@@ -60,7 +61,7 @@ export function SeletData({ handleCars }:myProps): JSX.Element {
             <span>Car Type</span>
             <select disabled={!datesCompleted} className="selection">
               {CATEGORIES.map((category) => (
-                <option onClick={() => handleCars(dateIn,dateOut,category)} key={category} id="op">
+                <option onClick={() => {handleFilter(category); console.log("clicked")}} key={category} id="op">
                   {category}
                 </option>
               ))}

@@ -11,7 +11,7 @@ import { useCars } from "../../hooks/useCars";
 export function RentVehicles(): JSX.Element {
   const [show,setShow] = useState<boolean>(false);
   const [carSelected, setCarSelected] = useState<Car>();
-  const {vehicles,setAvailability} = useCars({});
+  const {vehicles,setAvailability,setFilters} = useCars();
 
   const handleCar = (id: number) => {
     const car: Car | undefined = vehicles.find(
@@ -20,13 +20,21 @@ export function RentVehicles(): JSX.Element {
     setCarSelected(car);
   };
 
-  const handleCars = (from:Date,to:Date,which?:string) => {
+  const handleCars = (from:Date,to:Date) => {
     const lang:string = "sv-SE";
     setAvailability(from.toLocaleDateString(lang),
-                    to.toLocaleDateString(lang),
-                    which);
+                    to.toLocaleDateString(lang));
     setShow(true);
   };
+
+  const handleFilter = (category:string) => {
+    console.log("a ver")
+    setFilters({category:category});
+    setShow(false);
+    setTimeout(() => {
+      setShow(true);
+    }, 300);
+  }
 
   const handleRent = () => {
     const dropInDate: any = document.getElementById("dropInDate");
@@ -47,6 +55,7 @@ export function RentVehicles(): JSX.Element {
           <div className="col-lg-2">
             <SeletData
               handleCars={handleCars}
+              handleFilter={handleFilter}
             />
           </div>
           <div className="col-lg-3">

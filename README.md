@@ -18,8 +18,8 @@ But if you want to run the backend too or the hole project in Docker, the only t
 2. Build the Docker container: `docker build -t database:test .`
 3. Run the container: `docker run --name db -p 3307:3306 -d database:test`
 > To stop/turn off the container: `docker stop db`
-
 > To re-run/restart the container: `docker restart db`
+By default, the database have only one user who is the admin, width email `admin@example.com` and password `admin`.
 
 ## Running with Docker
 You can run in Docker:

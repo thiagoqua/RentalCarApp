@@ -7,3 +7,5 @@ export const CATEGORIES:string[] = [
 export enum comingFrom {
     SIGNUP, HOME, USER
 }
+
+export const Filter:Record<'category',string> = {category:'all'};

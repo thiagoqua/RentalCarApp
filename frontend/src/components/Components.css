@@ -62,7 +62,7 @@ div{
     width: fit-content;
     overflow-y: scroll;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr fit-content(50%);
 }
 
 .micro-item{

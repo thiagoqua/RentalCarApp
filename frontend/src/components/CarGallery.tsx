@@ -4,7 +4,7 @@ import { Car } from "../models/Car";
 import { useState } from "react";
 
 export function CarGallery():JSX.Element{
-  const {vehicles} = useCars({});
+  const {vehicles} = useCars();
   const [index,setIndex] = useState<number>(0);
   const actual:Car = vehicles[index];
 
