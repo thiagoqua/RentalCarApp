@@ -5,7 +5,7 @@ import { User } from "../models/User";
 
 export class UserService{
 
-  public signUp(user:RegisterRequest):Promise<Response>{          //its any becouse it can return an error
+  public signUp(user:RegisterRequest):Promise<Response>{          
     return fetch(`${APIURL}/user/register`,{
       method: 'POST',
       headers: {'Content-Type':'application/json'},

@@ -3,9 +3,6 @@ import { Disponibility } from "../models/Disponibility";
 import { User } from "../models/User";
 
 export class DisponibilityService{
-
-  constructor(){
-  }
   
   public save(dispo:Disponibility,userToken:string):Promise<any>{
     return fetch(`${APIURL}/disponibility/reserve`,{

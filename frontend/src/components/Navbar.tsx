@@ -13,7 +13,8 @@ export function Navbar({changeViewForAdmins,inAdminPage}:Props): JSX.Element {
   const buttonMessage:string = inAdminPage ? 'Home' : 'Admin';
 
   const handleLogOut = () => {
-    changeViewForAdmins!();
+    if(inAdminPage)
+      changeViewForAdmins!();
     logout();
   }
 
