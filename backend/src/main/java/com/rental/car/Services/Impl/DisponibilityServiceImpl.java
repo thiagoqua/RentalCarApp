@@ -51,6 +51,11 @@ public class DisponibilityServiceImpl implements DisponibilityService {
     public ResponseEntity<List<Disponibility>> getAll(Long adminId) {
         if(!userService.checkForAdmin(adminId))
             return ResponseEntity.status(HttpStatusCode.valueOf(401)).build();
-        return ResponseEntity.ok(repo.findAll());
+        return ResponseEntity.ok(getAll());
+    }
+
+    @Override
+    public List<Disponibility> getAll() {
+        return repo.findAll();
     }
 }

@@ -28,6 +28,7 @@ export class DisponibilityService{
   public deleteById(id:number,userToken:string):Promise<Response>{
     return fetch(`${APIURL}/disponibility/delete?id=${id}`,
     {
+      method:'DELETE',
       headers:new Headers({
         'Content-Type':'application/json',
         'Authorization':`Bearer ${userToken}`
@@ -46,8 +47,9 @@ export class DisponibilityService{
   }
 
   public setPaid(user:User,id:number):Promise<Response>{
-    return fetch(`${APIURL}/disponibility/admin/paid?adminId=${user.id!}&dispoId=${id}`,
+    return fetch(`${APIURL}/disponibility/admin/paid?adminId=${user.id!}&id=${id}`,
     {
+      method:'PUT',
       headers:new Headers({
         'Content-Type':'application/json',
         'Authorization':`Bearer ${user.token}`

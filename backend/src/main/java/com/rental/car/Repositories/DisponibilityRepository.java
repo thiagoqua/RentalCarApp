@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 public interface DisponibilityRepository extends JpaRepository<Disponibility,Long> {
@@ -17,5 +16,4 @@ public interface DisponibilityRepository extends JpaRepository<Disponibility,Lon
     List<Long> findNotAvailableCars(Timestamp dateIn,Timestamp dateOut);
     List<Disponibility> findByUserId(Long userId);
 }
-
 

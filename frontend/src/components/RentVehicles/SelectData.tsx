@@ -3,25 +3,31 @@ import { CATEGORIES } from "../../helpers/constants";
 import { useDates } from "../../hooks/useDates";
 
 interface myProps {
-  handleCars: (from:any,to:any) => void;
+  handleCars: (from:Date,to:Date) => void;
   handleFilter: (category:string) => void;
+  handleReset:() => void;
 }
 
-export function SeletData({handleCars,handleFilter}:myProps): JSX.Element {
+export function SeletData({handleCars,handleFilter,handleReset}:myProps): JSX.Element {
   const {setFirstDate,setSecondDate,dateIn,dateOut,datesCompleted,reset} = useDates();
+  const minDateIn:Date = new Date();
 
-  const handleDates = (isFirstDate:boolean) => {
+  if(minDateIn.getHours() > 7)
+    minDateIn.setDate(minDateIn.getDate() + 1);
+
+  const handleDates = (isFirstDate:boolean,value:string) => {
+    const valueAsDate:Date = new Date(value.split('-').join('/'));
+
     if(isFirstDate)
-      setFirstDate();
+      setFirstDate(valueAsDate);
     else{
-      setSecondDate();
-      setTimeout(() => {
-        handleCars(dateIn,dateOut);
-      },500);
+      setSecondDate(valueAsDate);
+      handleCars(dateIn,valueAsDate);
     }
   }
 
   const resetDates = () => {
+    handleReset();
     reset();
   }
 
@@ -34,10 +40,8 @@ export function SeletData({handleCars,handleFilter}:myProps): JSX.Element {
           <input
             type="date"
             id="dropInDate"
-            onChange={() => {
-              handleDates(true);
-            }}
-            min={new Date().toJSON().slice(0, 10)}
+            onChange={(event) => handleDates(true,event.target.value)}
+            min={minDateIn.toJSON().slice(0,10)}
             className="selection"
             disabled={datesCompleted}
           />
@@ -47,7 +51,7 @@ export function SeletData({handleCars,handleFilter}:myProps): JSX.Element {
           <input
             type="date"
             id="dropOffDate"
-            onChange={() => handleDates(false)}
+            onChange={(event) => handleDates(false,event.target.value)}
             min={dateOut?.toJSON().slice(0, 10)}
             disabled={dateIn ? false : true}
             className="selection"
@@ -61,7 +65,7 @@ export function SeletData({handleCars,handleFilter}:myProps): JSX.Element {
             <span>Car Type</span>
             <select disabled={!datesCompleted} className="selection">
               {CATEGORIES.map((category) => (
-                <option onClick={() => {handleFilter(category); console.log("clicked")}} key={category} id="op">
+                <option onClick={() => handleFilter(category)} key={category} id="op">
                   {category}
                 </option>
               ))}

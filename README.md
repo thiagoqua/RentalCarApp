@@ -1,3 +1,5 @@
+# TODO
+change the query request when passing dates
 # Pre-requeriments
 1. Docker.
 2. (optional) Node.

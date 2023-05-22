@@ -21,15 +21,14 @@ export class UserService{
     });
   }
 
-  public checkTokenValidation(user:User):Promise<boolean>{
-    return fetch(`${APIURL}/user/validate?userid=${user.id}&token=${user.token}`)
-            .then(res => res.json());
+  public checkTokenValidation(user:User):Promise<Response>{
+    return fetch(`${APIURL}/user/validate?userid=${user.id}&token=${user.token}`);
   }
 
   public getAllById(requesting:User,ids:number[]):Promise<Response>{
     return fetch(`${APIURL}/user/admin/idmulti?adminId=${requesting.id}`,
     {
-      method: 'POST',
+      method: 'PUT',
       headers:new Headers({
         'Content-Type':'application/json',
         'Authorization':`Bearer ${requesting.token}`

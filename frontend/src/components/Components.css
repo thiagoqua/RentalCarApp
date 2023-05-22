@@ -23,6 +23,10 @@ div{
     font-size: 120%;
 }
 
+.hidden{
+    display: none;
+}
+
 .navbar a{
     margin-top:0;
 }
@@ -332,6 +336,10 @@ div{
   .accent{
     color:#ef233c;
 }
+    .paid{
+        font-size: large;
+        color:rgb(28, 138, 101);
+    }
 
   .disabled{
     color: #989a9e;

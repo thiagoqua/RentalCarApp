@@ -6,14 +6,11 @@ import com.rental.car.Repositories.CarRepository;
 import com.rental.car.Repositories.DisponibilityRepository;
 import com.rental.car.Services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -45,9 +42,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<String> getCategories() {
-        List<CarCategory> categories = List.of(CarCategory.values());
-        return categories.stream().map(category -> category.toString())
-                .toList();
+        return carRepo.findAllCategories();
     }
 
     @Override
@@ -66,22 +61,21 @@ public class CarServiceImpl implements CarService {
         return availableCars.stream().filter(car -> {
             boolean isAvailable = true;
             for(Long id : notAvailableCarsIds)
-                isAvailable = car.getId() != id;
+                isAvailable = !car.getId().equals(id);
             return isAvailable;
         }).toList();
     }
 
     @Override
     public List<Car> getByIds(List<Long> ids) {
-        List<Car> response = new Vector<Car>();
-        ids.forEach(id -> {
-            response.add(carRepo.findById(id).get());
-        });
-        return response;
+        return carRepo.findAllById(ids);
     }
 
     @Override
-    public Car getById(Long id) {
-        return carRepo.findById(id).orElse(null);
+    public ResponseEntity<Car> getById(Long id) {
+        Optional<Car> ret = carRepo.findById(id);
+        return ret.isPresent()
+                ? ResponseEntity.ok(ret.get())
+                : ResponseEntity.status(HttpStatusCode.valueOf(409)).build();
     }
 }

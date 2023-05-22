@@ -28,7 +28,6 @@ export function RentVehicles(): JSX.Element {
   };
 
   const handleFilter = (category:string) => {
-    console.log("a ver")
     setFilters({category:category});
     setShow(false);
     setTimeout(() => {
@@ -56,6 +55,7 @@ export function RentVehicles(): JSX.Element {
             <SeletData
               handleCars={handleCars}
               handleFilter={handleFilter}
+              handleReset={() => setShow(false)}
             />
           </div>
           <div className="col-lg-3">

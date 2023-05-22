@@ -22,7 +22,6 @@ export function useCars():any{
   }
 
   useEffect(() => {
-    console.log("created")
     service.getAllCars().then((cars: Car[]) => {
       allVehicles.current = cars;
       setVehicles(cars);

@@ -11,4 +11,5 @@ public interface DisponibilityService {
     void delete(Long id);
     ResponseEntity<Void> setPaid(Long adminId, Long dispoId);
     ResponseEntity<List<Disponibility>> getAll(Long adminId);
+    List<Disponibility> getAll();
 }

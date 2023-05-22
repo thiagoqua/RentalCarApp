@@ -62,13 +62,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user;
         String token;
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()
-                )
+                new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword())
         );
         userCheck = repo.findByEmail(request.getEmail());
 
         if(userCheck.isEmpty())
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatusCode.valueOf(404)).build();
 
         user = userCheck.get();
         token = jwtService.generateToken(user);
@@ -76,9 +75,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public ResponseEntity<Boolean> validate(String token, Long userId) {
+    public ResponseEntity<Void> validate(String token, Long userId) {
         return jwtService.isTokenValid(token,userId)
-                ? ResponseEntity.ok(true)
-                : ResponseEntity.ok(false);
+                ? ResponseEntity.ok(null)
+                : ResponseEntity.status(HttpStatusCode.valueOf(406)).build();
     }
 }

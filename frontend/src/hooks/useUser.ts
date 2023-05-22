@@ -13,8 +13,8 @@ export function useUser():any{
     if(user){
       //check for the validation of the token
       service.checkTokenValidation(user)
-        .then((valid:boolean) => {
-          if(valid)
+        .then((res:Response) => {
+          if(res.ok)
             setUserLogged(user)
           else
             removeSomething('user');

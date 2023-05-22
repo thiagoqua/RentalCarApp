@@ -3,76 +3,37 @@ import { ReservationInfo } from "../components/ReservationInfo";
 import { Car } from "../models/Car";
 import { Disponibility } from "../models/Disponibility";
 import { User } from "../models/User";
-import { useUser } from "../hooks/useUser";
-import { DisponibilityService } from "../services/disponibilityService";
-import { CarService } from "../services/carService";
-import { UserService } from "../services/userService";
+import { useAdmin } from "../hooks/useAdmin";
 
 enum buttonOptions{
   CANCEL, CONFIRM_PAY
 }
 
 export function AdminHome():JSX.Element{
-  const {userLogged} = useUser();
-  const [dispos,setDispos] = useState<Disponibility[]>([]);
-  const [users,setUsers] = useState<User[]>([]);
-  const [cars,setCars] = useState<Car[]>([]);
+  const {adminLogged,dispos,users,cars,
+        setPaid,deleteReservation,resetData} = useAdmin({setError:(msg:string) => setError(msg)});
   const [error,setError] = useState<string>("");
   const [loading,setLoading] = useState<boolean>(true);
-  const dispoService:DisponibilityService = new DisponibilityService();
+
+  useEffect(() => {
+    setLoading(false);
+  },[users]);
 
   const handleClick = (pressed:buttonOptions,id:number) => {
     setLoading(true);
     if(pressed == buttonOptions.CONFIRM_PAY)
-      dispoService.setPaid(userLogged,id);
+      setPaid(id)
     else
-      dispoService.deleteById(id,userLogged.token);
+      deleteReservation(id);
+    
+    //wait 1 second to the second petition to make effect of the first in the db
     setTimeout(() => {
-      resetEverything();
-      getEverything();
+      resetData();
+    },1000);
+    //wait other second to display correctly the info in the ui
+    setTimeout(() => {
       setLoading(false);
-    },500);
-  }
-
-  useEffect(() => {
-    if(userLogged)
-      getEverything();
-  },[userLogged])
-
-  useEffect(() => {
-    if(userLogged){
-      const carService:CarService = new CarService();
-      const userService:UserService = new UserService();
-      carService.getCarsByIds(dispos!.map((dispo:Disponibility) => dispo.carId))
-        .then((cars:Car[]) => setCars(cars));
-      userService.getAllById(userLogged as User,dispos!.map((dispo:Disponibility) => dispo.userId!))
-        .then((response:Response) => {
-          if(response.status == 401)
-            setError("You are not an ADMIN user to access this resource");
-          else
-            response.json().then((users:User[]) => {
-              setUsers(users);
-              setLoading(false);
-            });
-        })
-    }
-  },[dispos[0]]);
-
-  const resetEverything = () => {
-    setDispos([]);
-    setUsers([]);
-    setCars([]);
-    setError("");
-    setLoading(true);
-  }
-
-  const getEverything = () => {
-    dispoService.getAll(userLogged.id!,userLogged.token!).then((response:Response) => {
-      if(response.status == 401)
-        setError("You are not an ADMIN user to access this resource");
-      else
-        response.json().then((data:Disponibility[]) => setDispos(data));
-    })
+    }, 2000);
   }
 
   const showData = (id:number) => {
@@ -95,13 +56,15 @@ export function AdminHome():JSX.Element{
   
   return (
     <>
-      <h1>Welcome, {userLogged?.firstname} {userLogged?.lastname}</h1>
+      <h1>Welcome, {adminLogged?.firstname} {adminLogged?.lastname}</h1>
       <div className="rents-list">
         {!loading 
         ? 
           dispos.map((dispo:Disponibility,index:number) => (
             <div className="col-lg-4 col-md-6 col-sm-12 rents-item" key={dispo.id}>
-              <ReservationInfo reservation={dispo} carReserved={cars[index]} key={dispo.id}/>
+              <ReservationInfo  reservation={dispo} 
+                                carReserved={cars.find((car:Car) => car.id == dispo.carId)} 
+                                key={dispo.id}/>
               {showData(dispo.userId!)}
               {dispo.paid
                 ? 

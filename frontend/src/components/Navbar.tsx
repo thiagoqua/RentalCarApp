@@ -11,6 +11,7 @@ export function Navbar({changeViewForAdmins,inAdminPage}:Props): JSX.Element {
   const {userLogged,logout} = useUser();
   const isAdmin:boolean = userLogged && userLogged.role === 'ADMIN';
   const buttonMessage:string = inAdminPage ? 'Home' : 'Admin';
+  const linksClassname = inAdminPage ? 'hidden' : 'navbar-links';
 
   const handleLogOut = () => {
     if(inAdminPage)
@@ -20,7 +21,7 @@ export function Navbar({changeViewForAdmins,inAdminPage}:Props): JSX.Element {
 
   return (
     <div className="navbar">
-      <div className="navbar-links">
+      <div className={linksClassname}>
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#gallery">Car Gallery</a>
