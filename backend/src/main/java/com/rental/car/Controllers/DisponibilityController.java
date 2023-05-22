@@ -33,9 +33,9 @@ public class DisponibilityController {
     @Operation(summary = "Get the cars by its disponibilities")
     @Parameters(value = {
             @Parameter(name = "in",description = "Reservation's date in",
-                        example = "'2023-05-20 12:00:00'",in = ParameterIn.QUERY),
+                        example = "2023-05-20",in = ParameterIn.QUERY),
             @Parameter(name = "out",description = "Reservation's date out",
-                        example = "'2023-05-30 12:00:00'",in = ParameterIn.QUERY)
+                        example = "2023-05-30",in = ParameterIn.QUERY)
     })
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "The cars available from the dates given"),

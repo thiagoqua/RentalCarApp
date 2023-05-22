@@ -20,10 +20,10 @@ import org.springframework.context.annotation.Configuration;
                 ),
                 description = "An API for my rental car web project"
         ),
-        servers = @Server(
-                url = "http://localhost:8080",
-                description = "local server"
-        )
+        servers = {
+                @Server(url = "http://localhost:8080",description = "development server"),
+//                @Server(url = "http://backend",description = "deploy server")
+        }
 )
 @SecurityScheme(
         name = "Bearer Authentication",

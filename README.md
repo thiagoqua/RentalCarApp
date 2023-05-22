@@ -6,8 +6,10 @@ change the query request when passing dates
 3. (optional) Java 17.
 3. (optional) Maven.
 ---
+# API documentation
+The backend has implemented Swagger to understand how the HTTP's petitions are being processed and to test the endpoints. To access it, you have to open your browser and go to the url `http:<backend-url>:8080/doc/`. If you are running the backend locally, replace the `<backend-url>` with `localhost`.
 # Run guide
-I have dockerized the hole project, so it can be runned partially or totally in a container. Only the database must be **always** in a Docker container becouse it's the heaviest part to configure in the project if it hasn't been dockerized.
+The hole project is dockerized, so it can be runned partially or totally in a container. Only the database must be **always** in a Docker container becouse it's the heaviest part to configure in the project if it hasn't been dockerized.
 <br/>
 Depending on which part of the project you want to run in a container, you have to change the database's url. 
 <br/>

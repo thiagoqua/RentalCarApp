@@ -19,7 +19,6 @@ public class CarServiceImpl implements CarService {
     private CarRepository carRepo;
     @Autowired
     private DisponibilityRepository dispoRepo;
-    private final String IN_OUT_HOUR = "09:00:00";          //09 am is the default in and out hour to rent a car
 
     @Override
     public List<Car> getAllCars() {
@@ -47,6 +46,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getCarsByDisponibility(String dateInStr, String dateOutStr) {
+        //09 am is the default in and out hour to rent a car
+        final String IN_OUT_HOUR = "09:00:00";
         Timestamp dateIn;
         Timestamp dateOut;
         List<Long> notAvailableCarsIds;
