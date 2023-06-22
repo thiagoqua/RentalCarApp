@@ -22,6 +22,7 @@ But if you want to run the backend too or the hole project in Docker, the only t
 By default, the database have only one user who is the admin, with email `admin@example.com` and password `admin`.
 > To stop/turn off the container: `docker stop db`
 <br/>
+
 > To re-run/restart the container: `docker restart db`
 
 ## Running with Docker
@@ -37,10 +38,15 @@ You can run in Docker:
 5. Build the Docker container: `docker build -t backend:test .`
 6. Run the container: `docker run -p 8080:8080 --network spring-mysql --name backend -d backend:test mvn spring-boot:run`
 <br/>
+
 **This process will took a while becouse Maven have to install all the project's dependencies and then run it.**
+
 > To stop/turn off the container: `docker stop backend`
 <br/>
+
 > To re-run/restart the container: `docker restart backend`
+<br/>
+
 #### Running the hole project
 1. Follow all the previous section' steps to run the backend and the database.
 2. Inside the project's root directory, go to the frontend one: `cd frontend`
@@ -59,4 +65,5 @@ You can run in Docker:
 6. Inside the project root directory, go to the backend directory: `cd backend`
 7. Run the project: `./mvnw spring-boot:run`
 <br/>
+
 **This process will took a while becouse Maven have to install all the project's dependencies and then run it.**
