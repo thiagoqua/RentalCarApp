@@ -21,7 +21,6 @@ But if you want to run the backend too or the hole project in Docker, the only t
 3. Run the container: `docker run --name db -p 3307:3306 -d database:test`
 By default, the database have only one user who is the admin, with email `admin@example.com` and password `admin`.
 > To stop/turn off the container: `docker stop db`
-<br/>
 
 > To re-run/restart the container: `docker restart db`
 
@@ -42,7 +41,6 @@ You can run in Docker:
 **This process will took a while becouse Maven have to install all the project's dependencies and then run it.**
 
 > To stop/turn off the container: `docker stop backend`
-<br/>
 
 > To re-run/restart the container: `docker restart backend`
 <br/>
@@ -53,8 +51,9 @@ You can run in Docker:
 3. Build the Docker container: `docker build -t frontend:test .`
 4. Run the container: `docker run -d -p 5173:5173 --name frontend frontend:test`
 5. Open your browser and search for `localhost:5173`
+
 > To stop/turn off the container: `docker stop frontend`
-<br/>
+
 > To re-run/restart the container: `docker restart frontend`
 ## Running with Node and Maven
 1. Clone the project.
